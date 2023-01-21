@@ -1,0 +1,70 @@
+@startuml
+object Utilizador {
+  -id:int
+  +nomeDeUsuario:string
+  +password:string
+  +nome:string
+  +tipo:string
+}
+
+object Utente {
+  -id:int
+  +nome:string
+  +dataDeNascimento:date
+  +sexo:string
+  +nomeResponsavel:string
+  +telefoneResponsavel:string
+  +emailResponsavel:string
+}
+
+object RegistoDiario {
+  -id:int
+  +data:date
+  +pequenoAlmoco:Refeicao
+  +almoco:Refeicao
+  +lanche:Refeicao
+  +jantar:Refeicao
+  +medicacoes: RegistoMedicacao[]
+  +banho:boolean
+  +pressao:string
+  +temperatura:string
+  +nivelDeSaturacaoDeOxigenio:string
+  +atividadesComUtente: RegistoAtividade[]
+  +classificacaoGeralDoDia:string
+  +observacoes:string
+}
+
+object Refeicao {
+  -id:int
+  +consumo:string
+  +observacoes:string
+}
+
+object RegistoAtividade {
+  -id:int
+  +tipo:string
+  +participacao:string
+  +observacoes:string
+}
+
+object RegistoMedicacao {
+  -id:int
+  +nome:string
+  +horario:time
+  +observacoes:string
+}
+
+object UtilizadorUtente{
+  -id:int
+  +utilizador_id:int
+  +utente_id:int
+}
+
+Utilizador --> UtilizadorUtente
+Utente --> UtilizadorUtente
+Utente --> RegistoDiario
+RegistoDiario --> RegistoAtividade
+RegistoDiario --> RegistoMedicacao
+RegistoDiario --> Refeicao
+
+@enduml
