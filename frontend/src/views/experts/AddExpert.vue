@@ -20,25 +20,53 @@
               />
             </div>
             <div class="form-group">
-              <select id="sltGroup" class="form-control form-control-lg" v-model="group" required>
-                <option value>-- SELECIONA GRUPO --</option>
-                <option value="anfibio">ANFÍBIO</option>
-                <option value="ave">AVE</option>
-                <option value="mamifero">MAMÍFERO</option>
-                <option value="peixe">PEIXE</option>
-                <option value="reptil">RÉPTIL</option>
+            <input
+              v-model="birth_date"
+              type="text"
+              onmouseenter="(this.type='date')"
+              onmouseleave="(this.type='text')"
+              class="form-control form-control-lg"
+              id="txtBirthDate"
+              placeholder="escreve data de nascimento"
+              required
+            />
+            </div>
+            <div class="form-group">
+              <select id="sltSex" class="form-control form-control-lg" v-model="sex" required>
+                <option value>-- SELECIONA SEXO --</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
               </select>
             </div>
             <div class="form-group">
-              <textarea
-                id="txtDescription"
+              <input
+                v-model="contact.name"
+                type="text"
                 class="form-control form-control-lg"
-                placeholder="Descricao do especialista"
-                cols="30"
-                rows="10"
-                v-model="description"
-                required
-              ></textarea>
+                id="txtContactName"
+                placeholder="escreve nome do contacto responsável"
+                
+              />
+            </div>
+            <div class="form-group">
+              <input
+                v-model="contact.phone"
+                type="text"
+                class="form-control form-control-lg"
+                id="txtContactPhone"
+                placeholder="escreve telefone do contacto responsável"
+                
+              />
+            </div>
+            <div class="form-group">
+              <input
+                v-model="contact.mail"
+                type="text"
+                class="form-control form-control-lg"
+                id="txtContactMail"
+                placeholder="escreve e-mail do contacto responsável"
+                
+              />
             </div>
             
             <button type="submit" class="btn btn-outline-success btn-lg mr-2">
@@ -70,8 +98,9 @@ export default {
   data: () => {
     return {
       name: "",
-      group: "",
-      description: ""
+      birth_date: "",
+      sex: "",
+      contact: { name: "", phone: "", mail: "" },
     };
   },
   computed: {

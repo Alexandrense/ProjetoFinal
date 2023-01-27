@@ -19,15 +19,26 @@
               />
             </div>
             <div class="form-group">
-              <select id="sltGroup" class="form-control form-control-lg" v-model="expert.group">                
-                <option value>-- SELECIONA GRUPO --</option>
-                <option value="anfibio">ANFÍBIO</option>
-                <option value="ave">AVE</option>
-                <option value="mamifero">MAMÍFERO</option>
-                <option value="peixe">PEIXE</option>
-                <option value="reptil">RÉPTIL</option>
+            <input
+              v-model="expert.birth_date"
+              type="date"
+              onmouseenter="(this.type='date')"
+              onmouseleave="(this.type='text')"
+              class="form-control form-control-lg"
+              id="txtBirthDate"
+              placeholder="escreve data de nascimento"
+              required
+            />
+            </div>
+            <div class="form-group">
+              <select id="sltSex" class="form-control form-control-lg" v-model="expert.sex">                
+                <option value>-- SELECIONA SEXO --</option>
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
               </select>
             </div>
+       
+
             <div class="form-group">
               <textarea
                 id="txtDescription"
