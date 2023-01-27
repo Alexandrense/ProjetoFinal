@@ -80,9 +80,9 @@ const routes = [
     component: () => import("@/views/sponsors/ListSponsors.vue")
   },
   {
-    path: "/admin/experts",
-    name: "listExperts",
-    component: () => import("@/views/experts/ListExperts.vue")
+    path: "/admin/patients",
+    name: "listPatients",
+    component: () => import("@/views/patients/ListPatients.vue")
   },  
   {
     path: "/admin/animals/:animalId",
@@ -105,14 +105,14 @@ const routes = [
     component: () => import("@/views/sponsors/EditSponsor.vue")
   },
   {
-    path: "/admin/experts/add",
-    name: "addExpert",
-    component: () => import("@/views/experts/AddExpert.vue")
+    path: "/admin/patients/add",
+    name: "addPatient",
+    component: () => import("@/views/patients/AddPatient.vue")
   },
   {
-    path: "/admin/experts/:expertId",
-    name: "editExpert",
-    component: () => import("@/views/experts/EditExpert.vue")
+    path: "/admin/patients/:expertId",
+    name: "editPatient",
+    component: () => import("@/views/patients/EditPatient.vue")
   }, 
   {
     path: "/profile",

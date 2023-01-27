@@ -7,7 +7,7 @@
         <b-col cols="2"></b-col>
         <b-col>
           <router-link
-            :to="{name:'addExpert'}"
+            :to="{name:'addPatient'}"
             tag="button"
             class="btn btn-outline-success mr-2 mt-2"
           >
@@ -46,7 +46,7 @@
                 <td class="pt-4">{{calculateAge(expert.birth_date)}}</td>
                 <td>
                   <router-link
-                    :to="{name:'editExpert', params:{expertId: expert._id}}"
+                    :to="{name:'editPatient', params:{expertId: expert._id}}"
                     tag="button"
                     class="btn btn-outline-success mr-2 mt-2"
                   >

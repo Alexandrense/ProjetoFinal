@@ -8,7 +8,7 @@
         <b-col cols="4">
           <b-card-group deck>
             <AdminOptionBox routeName="listUsers" iconName="users" title="Utilizadores"/>
-            <AdminOptionBox routeName="listExperts" iconName="microscope"  title="Utentes"/>
+            <AdminOptionBox routeName="listPatients" iconName="microscope"  title="Utentes"/>
           </b-card-group>
           <b-card-group deck class="mt-3">
             <AdminOptionBox routeName="listQuizzes" iconName="file-alt"  title="Quizzes"/>

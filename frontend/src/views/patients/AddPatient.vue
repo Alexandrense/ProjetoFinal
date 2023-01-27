@@ -1,16 +1,17 @@
 <template>
+  <!-- Portfolio Section -->
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Editar Utente" />
+      <HeaderPage title="Adicionar Utente" />
 
       <!--FORM-->
       <b-row>
         <b-col cols="2"></b-col>
-        <b-col cols="8">
-          <form @submit.prevent="update">
+        <b-col>
+          <form @submit.prevent="add">
             <div class="form-group">
               <input
-                v-model="expert.name"
+                v-model="name"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtName"
@@ -20,8 +21,8 @@
             </div>
             <div class="form-group">
             <input
-              v-model="expert.birth_date"
-              type="date"
+              v-model="birth_date"
+              type="text"
               onmouseenter="(this.type='date')"
               onmouseleave="(this.type='text')"
               class="form-control form-control-lg"
@@ -31,27 +32,25 @@
             />
             </div>
             <div class="form-group">
-              <select id="sltSex" class="form-control form-control-lg" v-model="expert.sex">                
+              <select id="sltSex" class="form-control form-control-lg" v-model="sex" required>
                 <option value>-- SELECIONA SEXO --</option>
                 <option value="masculino">Masculino</option>
                 <option value="feminino">Feminino</option>
               </select>
             </div>
-
             <div class="form-group">
               <input
-                v-model="expert.contactName"
+                v-model="contactName"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactName"
                 placeholder="escreve nome do contacto responsável"
-                required
+                
               />
             </div>
-
             <div class="form-group">
               <input
-                v-model="expert.contactPhone"
+                v-model="contactPhone"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactPhone"
@@ -61,7 +60,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="expert.contactMail"
+                v-model="contactMail"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactMail"
@@ -69,17 +68,14 @@
                 
               />
             </div>
-           
+            
             <button type="submit" class="btn btn-outline-success btn-lg mr-2">
-              <i class="fas fa-edit"></i> ATUALIZAR
-            </button>
+              <i class="fas fa-plus-square"></i>  ADICIONAR</button>
             <router-link
-              :to="{name: 'listExperts'}"
+              :to="{name: 'listPatients'}"
               tag="button"
               class="btn btn-outline-danger btn-lg"
-            >
-              <i class="fas fa-window-close"></i> CANCELAR
-            </router-link>
+            ><i class="fas fa-window-close"></i>  CANCELAR</router-link>
           </form>
         </b-col>
         <b-col cols="2"></b-col>
@@ -89,39 +85,35 @@
 </template>
 
 <script>
-import { EDIT_EXPERT } from "@/store/experts/expert.constants";
-
+import { ADD_EXPERT } from "@/store/experts/expert.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import router from "@/router";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "EditExpert",
+  name: "AddExpert",
   components: {
     HeaderPage
   },
   data: () => {
     return {
-      expert: {}
+      name: "",
+      birth_date: "",
+      sex: "",
+      contactName: "", 
+      contactPhone: "", 
+      contactMail: "" 
     };
   },
   computed: {
-    ...mapGetters("expert", ["getExpertsById", "getMessage"]),
+    ...mapGetters("expert", ["getExperts", "getMessage"])
   },
-  methods: {
-    removeComments() {
-      this.sponsor.comments.length = 0
-      this.$alert("Comentários removidos, clique em atualizar!", "Comentários!", "success");
-    },    
-    compareNames(u1, u2) {
-      if (u1.name > u2.name) return 1 * this.sortType;
-      else if (u1.name < u2.name) return -1 * this.sortType;
-      else return 0;
-    },
-    update() {
-      this.$store.dispatch(`expert/${EDIT_EXPERT}`, this.$data.expert).then(
+  methods: {    
+    
+    add() {
+      this.$store.dispatch(`expert/${ADD_EXPERT}`, this.$data).then(
         () => {
-          this.$alert(this.getMessage, "Especialista atualizado!", "success");
+          this.$alert(this.getMessage, "Especialista adicionado!", "success");
           router.push({ name: "listExperts" });
         },
         err => {
@@ -129,16 +121,7 @@ export default {
         }
       );
     }
-  },
-  created() {
-    this.expert = this.getExpertsById(this.$route.params.expertId);
   }
 };
-</script>
 
-<style scoped>
-.center_div {
-  margin: 0 auto;
-  width: 80%;
-}
-</style>
+</script>
