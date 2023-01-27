@@ -1,6 +1,6 @@
 module.exports = {
     mongodb: {
-        uri: 'mongodb://localhost:27017/test',
+        uri: 'mongodb://localhost:27017/appcuidar',
         collections: {
             animal: 'animals',
             question: 'questions',

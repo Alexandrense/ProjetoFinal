@@ -23,6 +23,7 @@
               <select id="sltType" class="form-control form-control-lg" v-model="type" required>
                 <option value>-- SELECIONA TIPO --</option>
                 <option value="admin">ADMINISTRADOR</option>
+                <option value="caregiver">CUIDADOR</option>
                 <option value="user">UTILIZADOR NORMAL</option>
               </select>
             </div>
