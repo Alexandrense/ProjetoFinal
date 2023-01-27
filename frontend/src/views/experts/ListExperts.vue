@@ -28,14 +28,14 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">
-                  NOME
+                  Nome
                   <i class="fas fa-arrow-up" v-if="sortType===1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
                 <th scope="col">Contato</th>
                 <th scope="col">Telefone</th>  
-                <th scope="col">E-Mail</th>                
-                <th scope="col">AÇÕES</th>
+                <th scope="col">Idade</th>                    
+                <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                 <td class="pt-4">{{expert.name}}</td>             
                 <td class="pt-4">{{expert.contactName}}</td>
                 <td class="pt-4">{{expert.contactPhone}}</td>
-                <td class="pt-4">{{expert.contactMail}}</td>
+                <td class="pt-4">{{calculateAge(expert.birth_date)}}</td>
                 <td>
                   <router-link
                     :to="{name:'editExpert', params:{expertId: expert._id}}"
@@ -99,6 +99,17 @@ export default {
           this.$alert(`${err.message}`, "Erro", "error");
         }
       );
+    },
+    
+    calculateAge(birthDate1) {
+      if (birthDate1) {
+        let currentDate = new Date(); 
+        let birthDate = new Date(birthDate1);
+        let difference = currentDate - birthDate;
+        let age = Math.floor(difference/31557600000);
+        return age
+      }
+      return "";
     },
     sort() {
       this.experts.sort(this.compareNames);
