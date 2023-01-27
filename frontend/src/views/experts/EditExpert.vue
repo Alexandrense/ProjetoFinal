@@ -1,7 +1,7 @@
 <template>
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Editar Sponsor" />
+      <HeaderPage title="Editar Utente" />
 
       <!--FORM-->
       <b-row>
@@ -37,18 +37,37 @@
                 <option value="feminino">Feminino</option>
               </select>
             </div>
-       
 
             <div class="form-group">
-              <textarea
-                id="txtDescription"
+              <input
+                v-model="expert.contactName"
+                type="text"
                 class="form-control form-control-lg"
-                placeholder="Descrição do especialista"
-                cols="30"
-                rows="10"
-                v-model="expert.description"
+                id="txtContactName"
+                placeholder="escreve nome do contacto responsável"
                 required
-              ></textarea>
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                v-model="expert.contactPhone"
+                type="text"
+                class="form-control form-control-lg"
+                id="txtContactPhone"
+                placeholder="escreve telefone do contacto responsável"
+                
+              />
+            </div>
+            <div class="form-group">
+              <input
+                v-model="expert.contactMail"
+                type="text"
+                class="form-control form-control-lg"
+                id="txtContactMail"
+                placeholder="escreve e-mail do contacto responsável"
+                
+              />
             </div>
            
             <button type="submit" class="btn btn-outline-success btn-lg mr-2">

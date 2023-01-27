@@ -4,8 +4,11 @@ const CONFIG = require('../config/config');
 
 const expertSchema = new Schema({
     name: String,
-    group: String,
-    description: String
+    birth_date: Date,
+    sex: String,
+    contactName: String,
+    contactPhone: String,
+    contactMail: String
 });
 
 module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.expert, expertSchema);

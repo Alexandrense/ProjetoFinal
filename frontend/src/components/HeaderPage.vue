@@ -2,16 +2,12 @@
   <b-container>
     <b-row class="text-center">
       <b-col>
-        <h2 class="page-section-heading mt-5">{{title.toUpperCase()}}</h2>
+        <h2 class="page-section-heading mt-1">{{title.toUpperCase()}}</h2>
       </b-col>
     </b-row>
     <b-row class="text-center">
       <b-col>
         <div class="divider-custom">
-          <div class="divider-custom-line"></div>
-          <div class="divider-custom-icon">
-            <i class="fas fa-star"></i>
-          </div>
           <div class="divider-custom-line"></div>
         </div>
       </b-col>
@@ -37,8 +33,8 @@ export default {
 
 .divider-custom .divider-custom-line {
   width: 100%;
-  max-width: 7rem;
-  height: 0.25rem;
+  max-width: 25rem;
+  height: 0.15rem;
   background-color: #2c3e50;
   border-radius: 1rem;
   border-color: #2c3e50 !important;

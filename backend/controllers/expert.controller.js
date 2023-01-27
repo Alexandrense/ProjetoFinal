@@ -26,8 +26,11 @@ exports.create = (req, res) => {
 
     new Expert({
         name: req.body.name,
-        group: req.body.group,
-        description: req.body.description
+        birth_date: req.body.birth_date,
+        sex: req.body.sex,
+        contactName: req.body.contactName,
+        contactPhone: req.body.contactPhone,
+        contactMail: req.body.contactMail
     }).save((error, expert) => {
         if (error) throw error;
         let message = ExpertMessages.success.s0;

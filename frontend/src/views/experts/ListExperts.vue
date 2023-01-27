@@ -1,7 +1,7 @@
 <template>
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Gestão de Especialistas" />
+      <HeaderPage title="Gestão de Utentes" />
       <!--MENU TOPO-->
       <b-row class="mb-4">
         <b-col cols="2"></b-col>
@@ -11,7 +11,7 @@
             tag="button"
             class="btn btn-outline-success mr-2 mt-2"
           >
-            <i class="fas fa-plus-square"></i> ADICIONAR ESPECIALISTA
+            <i class="fas fa-plus-square"></i> ADICIONAR UTENTE
           </router-link>
           <router-link :to="{name:'admin'}" tag="button" class="btn btn-outline-info mr-2 mt-2">
             <i class="fas fa-bars"></i> MENU PRINCIPAL
@@ -32,14 +32,18 @@
                   <i class="fas fa-arrow-up" v-if="sortType===1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
-                <th scope="col">Animal</th>              
+                <th scope="col">Contato</th>
+                <th scope="col">Telefone</th>  
+                <th scope="col">E-Mail</th>                
                 <th scope="col">AÇÕES</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="expert of experts" :key="expert._id">
                 <td class="pt-4">{{expert.name}}</td>             
-                <td class="pt-4">{{expert.group}}</td>
+                <td class="pt-4">{{expert.contactName}}</td>
+                <td class="pt-4">{{expert.contactPhone}}</td>
+                <td class="pt-4">{{expert.contactMail}}</td>
                 <td>
                   <router-link
                     :to="{name:'editExpert', params:{expertId: expert._id}}"

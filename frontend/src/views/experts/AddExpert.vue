@@ -2,7 +2,7 @@
   <!-- Portfolio Section -->
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Adicionar Sponsor" />
+      <HeaderPage title="Adicionar Utente" />
 
       <!--FORM-->
       <b-row>
@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="contact.name"
+                v-model="contactName"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactName"
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="contact.phone"
+                v-model="contactPhone"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactPhone"
@@ -60,7 +60,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="contact.mail"
+                v-model="contactMail"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactMail"
@@ -100,7 +100,9 @@ export default {
       name: "",
       birth_date: "",
       sex: "",
-      contact: { name: "", phone: "", mail: "" },
+      contactName: "", 
+      contactPhone: "", 
+      contactMail: "" 
     };
   },
   computed: {
