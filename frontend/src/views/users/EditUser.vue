@@ -68,34 +68,7 @@
                 placeholder="escreve país"
                 required
               />
-            </div>
-            <div class="form-group">
-              <input
-                v-model="user.gamification.points"
-                type="text"
-                min="0"
-                onmouseenter="(this.type='number')"
-                onmouseleave="(this.type='text')"
-                class="form-control form-control-lg"
-                id="txtPoints"
-                placeholder="escreve pontos"
-                
-              />
-            </div>
-              <div class="form-group">
-              <input
-                v-model="user.gamification.quiz"
-                type="text"
-                min="0"
-                onmouseenter="(this.type='number')"
-                onmouseleave="(this.type='text')"
-                class="form-control form-control-lg"
-                id="txtCountry"
-                placeholder="escreve último nível de quiz completo"
-                
-              />
-            </div>
-            
+            </div>                      
             <div class="form-group">
               <input
                 v-model="user.auth.username"

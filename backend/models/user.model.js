@@ -34,16 +34,6 @@ const userSchema = new Schema({
     active: {
         type: Boolean,
         default: true
-    },
-    gamification: {
-        points: {
-            type: Number,
-            default: 0
-        },
-        quiz: {
-            type: String,
-            default: null
-        }
     }
 
 });
