@@ -2,7 +2,6 @@ module.exports = {
     mongodb: {
         uri: 'mongodb://localhost:27017/appcuidar',
         collections: {
-            animal: 'animals',
             user: 'users',
             user_levels: "user_levels",
             dayRegistry: "dayregistries",
