@@ -10,7 +10,7 @@
           <form @submit.prevent="update">
             <div class="form-group">
               <select id="sltUtente" class="form-control form-control-lg" v-model="sponsor.patient" placeholder="utente" required>
-                <option v-for="option in patients" :key="option._id">
+                <option v-for="option in patients" :key="option._id" :value="option._id">
                   {{ option.name }}
                 </option>
               </select>

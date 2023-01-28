@@ -13,7 +13,7 @@
           >
             <i class="fas fa-plus-square"></i> ADICIONAR REGISTO DIÁRIO
           </router-link>
-          <router-link :to="{name:'admin'}" tag="button" class="btn btn-outline-info mr-2 mt-2">
+          <router-link :to="{name:'home'}" tag="button" class="btn btn-outline-info mr-2 mt-2">
             <i class="fas fa-bars"></i> MENU PRINCIPAL
           </router-link>
         </b-col>

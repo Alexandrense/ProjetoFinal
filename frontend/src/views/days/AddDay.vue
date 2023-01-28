@@ -10,9 +10,9 @@
         <b-col>
           <form @submit.prevent="add">
             <div class="form-group">
-              <select id="sltGroup" class="form-control form-control-lg" v-model="animal" required>
+              <select id="sltGroup" class="form-control form-control-lg" v-model="patient" required>
                 <option value>-- SELECIONA UTENTE --</option>
-                <option v-for="option in patients" :key="option._id">
+                <option v-for="option in patients" :key="option._id" :value="option._id">
                   {{ option.name }}
                 </option>
               </select>
@@ -70,7 +70,7 @@
                 placeholder="escreve mensagem do sponsor"
                 cols="30"
                 rows="5"
-                v-model="message"
+                v-model="description"
                 required
               ></textarea>
             </div>
@@ -104,9 +104,13 @@ export default {
   },
   data: () => {
     return {
-      name: "",
-      animal: "",
-      message: "",
+      patient: "",
+      registryDate: "",
+      bath: "",
+      bloodPressure: "",
+      temperature: "",
+      dayClassification: "",
+      description: "",
       patients: [],
       sortType: 1
     };

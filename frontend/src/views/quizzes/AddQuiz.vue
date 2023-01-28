@@ -45,16 +45,26 @@
                 required
               />
             </div>
+            
+            <button
+              @click="addQuestion"
+              type="button"
+              class="btn btn-outline-warning mr-2"
+            ><i class="fas fa-plus-square"></i> ADICIONAR UTILIZADOR AO UTENTE</button>
+            <br><br>
+
             <div v-if="questions.length">
               <div class="row">
                 <div class="col-md-9">
-                  <h4>Lista de questões</h4>
+                  <h4>Lista de utilizadores</h4>
                 </div>
                 <div class="col-md-3">
                   <h4>Ações</h4>
                 </div>
               </div>
             </div>
+            
+           
             <div v-for="(question, index) in questions" :key="question.id">
               <div class="form-group">
                 <div class="row">
@@ -69,7 +79,7 @@
                         v-for="q in getQuestionsByLevel"
                         :key="q._id"
                         :value="q._id"
-                      >{{q.question}}</option>
+                      >{{q.name}} ({{q.type}})</option>
                     </select>
                   </div>
                   <div class="col-md-3">
@@ -83,13 +93,8 @@
               </div>
             </div>
             
-            <button
-              @click="addQuestion"
-              type="button"
-              class="btn btn-outline-success mr-2"
-            ><i class="fas fa-plus-square"></i> ADICIONAR QUESTÕES</button>
-            <!--<pre>{{ $data }}</pre>-->
-            <button type="submit" class="btn btn-outline-success mr-2"><i class="fas fa-save"></i> GRAVAR QUIZ</button>
+            
+            <button type="submit" class="btn btn-outline-success mr-2"><i class="fas fa-save"></i> GRAVAR UTENTE</button>
             <router-link
               :to="{name: 'listQuizzes'}"
               tag="button"
@@ -106,7 +111,7 @@
 <script>
 import { ADD_QUIZ } from "@/store/quizzes/quiz.constants";
 import HeaderPage from "@/components/HeaderPage.vue"
-import { FETCH_QUESTIONS } from "@/store/questions/question.constants";
+import { FETCH_USERS } from "@/store/users/user.constants";
 import router from "@/router";
 
 import { mapGetters } from "vuex";
@@ -127,9 +132,9 @@ export default {
   },
   computed: {
     ...mapGetters("quiz", ["getMessage"]),
-    ...mapGetters("question", ["getQuestions"]),
+    ...mapGetters("user", ["getUsers"]),
     getQuestionsByLevel() {
-      return this.myQuestions.filter(question => question.level == this.level);
+      return this.myQuestions.filter(item => item.type != 'admin');
     }
   },
   methods: {
@@ -164,9 +169,9 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(`question/${FETCH_QUESTIONS}`).then(
+    this.$store.dispatch(`user/${FETCH_USERS}`).then(
       () => {
-        this.myQuestions = this.getQuestions;
+        this.myQuestions = this.getUsers;
       },
       err => {
         this.$alert(`${err.message}`, "Erro", "error");

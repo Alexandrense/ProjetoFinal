@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <!-- Header -->
-    <header class="masthead bg-secondary text-white text-center">
+    <header class="masthead bg-primary text-white text-center">
     <b-row>
       <b-col>
           <img class="masthead-avatar mb-1" src="@/assets/appcuidar.png" />
@@ -12,53 +12,6 @@
     </b-row>      
     </header>
       
-    <!-- Rules section -->
-    <section class="page-section bg-primary" id="rules">
-      <b-container fluid>
-        <h4
-          class="page-section-heading text-center text-uppercase text-secondary mb-5"
-        >
-          REGRAS
-        </h4>
-        <b-row class="mt-5 mb-5">
-          <b-col cols="2"></b-col>
-          <b-col class="text-center">
-            <i class="fas fa-hippo fa-3x" style="color:white"></i>
-            <p>
-              1 - Seleciona <strong>ANIMAIS</strong> e estuda tudo sobre os animais que tens disponíveis!
-            </p>
-          </b-col>
-          <b-col cols="2"></b-col>
-          <b-col class="text-center">
-            <i class="fas fa-comment fa-3x" style="color:white"></i>
-            <p>2 - Mostra quem são os teus animais preferidos e fala com os teus
-            amigos sobre qualquer animal!
-            </p>
-          </b-col>
-          <b-col cols="2"></b-col>
-        </b-row>
-        <b-row class="mb-5">
-          <b-col cols="2"></b-col>
-          <b-col class="text-center">
-            <i class="fas fa-table fa-3x" style="color:white"></i>
-            <p>3 - Quando te sentires preparado, seleciona <strong>QUIZZES </strong>e começa a
-            jogar!
-            </p>
-          </b-col>
-          <b-col cols="2"></b-col>
-          <b-col class="text-center">
-            <i class="fas fa-medal fa-3x" style="color:white"></i>
-            <p>4 - À medida que fores avançando, ganhas pontos, desbloqueias
-            novos animais e sobes no ranking dos maiores especialistas de animais
-            do planeta!</p>
-          </b-col>
-          <b-col cols="2"></b-col>
-        </b-row>
-
-      </b-container>
-    </section>
-
-
     <!-- Copyright Section -->
     <section class="copyright py-4 text-center text-white">
       <div class="container">

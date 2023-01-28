@@ -13,7 +13,7 @@
             class="btn btn-outline-success mr-2 mt-2"
           ><i class="fas fa-plus-square"></i> ADICIONAR UTILIZADOR</router-link>
           <router-link
-            :to="{name:'admin'}"
+            :to="{name:'home'}"
             tag="button"
             class="btn btn-outline-info mr-2 mt-2"
           ><i class="fas fa-bars"></i> MENU PRINCIPAL</router-link>
@@ -29,20 +29,18 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">
-                  NOME
+                  Nome
                   <i class="fas fa-arrow-up" v-if="sortType===1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else  @click="sort()"></i>
                 </th>
-                <th scope="col">TIPO</th>
-                <th scope="col">DATA DE CRIAÇÃO</th>
-                <th scope="col">AÇÕES</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="user of users" :key="user._id">                
                 <td class="pt-4">{{user.name}}</td>
                 <td class="pt-4">{{user.type==="admin"?"Administrador":user.type==="user"?"Utilizador normal":"Cuidador"}}</td>
-                <td class="pt-4">{{formatDate(user.registration_date)}}</td>
                 <td>
                   <router-link
                     :to="{name:'editUser', params:{userId: user._id}}"

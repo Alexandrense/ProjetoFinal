@@ -2,7 +2,7 @@ import API_URL from './config.js'
 
 export const sponsorService = {
   async getSponsors(token) {
-    let response = await fetch(`${API_URL}/sponsors`, {
+    let response = await fetch(`${API_URL}/dailyregistries`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const sponsorService = {
   },
 
   async addSponsor(token, payload) {
-    const response = await fetch(`${API_URL}/sponsors`, {
+    const response = await fetch(`${API_URL}/dailyregistries`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export const sponsorService = {
   },
 
   async editSponsor(token, payload) {
-    const response = await fetch(`${API_URL}/sponsors/${payload._id}`, {
+    const response = await fetch(`${API_URL}/dailyregistries/${payload._id}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const sponsorService = {
   },
   
   async removeSponsor(token, id) {
-    const response = await fetch(`${API_URL}/sponsors/${id}`, {
+    const response = await fetch(`${API_URL}/dailyregistries/${id}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',

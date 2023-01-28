@@ -19,17 +19,6 @@
               />
             </div>
             <div class="form-group">
-              <textarea
-                id="txtDescription"
-                class="form-control form-control-lg"
-                placeholder="escreve descrição"
-                cols="30"
-                rows="10"
-                v-model="user.description"
-                required
-              ></textarea>
-            </div>
-            <div class="form-group">
               <input
                 v-model="user.location.city"
                 type="text"

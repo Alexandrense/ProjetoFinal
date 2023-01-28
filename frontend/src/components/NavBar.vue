@@ -17,7 +17,8 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav v-if="isUserLoggedIn" class="ml-auto mr-5">
           <b-nav-item :to="{ name: 'listDays' }">REGISTO DIARIO</b-nav-item>
-          <b-navbar-nav v-if="getUserType === 'user'">
+          <b-nav-item :to="{ name: 'listQuizzes' }">Quizzes</b-nav-item>
+          <b-navbar-nav v-if="getUserType != 'admin'">
             <b-nav-item :to="{ name: 'profile' }">PERFIL</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav v-else>
@@ -25,7 +26,7 @@
             <b-nav-item :to="{ name: 'listPatients' }">UTENTES</b-nav-item>
           </b-navbar-nav>
         </b-navbar-nav>
-        <b-navbar-nav v-else>
+        <b-navbar-nav class="ml-auto mr-5" v-else>
           <b-nav-item :to="{ name: 'login' }">LOGIN</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
