@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const CONFIG = require('../config/config');
 
-const sponsorSchema = new Schema({
+const dayRegistrySchema = new Schema({
     patient: String,
     registryDate: Date,
     bath: String,
@@ -12,4 +12,4 @@ const sponsorSchema = new Schema({
     description: String
 });
 
-module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.sponsor, sponsorSchema);
+module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.dayRegistry, dayRegistrySchema);

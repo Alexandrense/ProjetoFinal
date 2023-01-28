@@ -1,23 +1,23 @@
 module.exports = {
     success: {
         s0: {
-            code: "SponsorCreated",
+            code: "DayRegistryCreated",
             http: 201,
             type: "success"
         },
         s1: {
             http: 200,
-            code: "SponsorUpdated",
+            code: "DayRegistryUpdated",
             type: "success"
         },
         s2: {
             http: 200,
-            code: "SponsorFound",
+            code: "DayRegistryFound",
             type: "success"
         },
         s3: {
             http: 200,
-            code: "SponsorDeleted",
+            code: "DayRegistryDeleted",
             type: "success"
         },
         s4: {
@@ -27,7 +27,7 @@ module.exports = {
         },
         s5: {
             http: 204,
-            code: "NoSponsors",
+            code: "NoDayRegistrys",
             type: "success"
         },
         s6: {
@@ -39,7 +39,7 @@ module.exports = {
     error: {
         e0: {
             http: 404,
-            code: "SponsorNotFound",
+            code: "DayRegistryNotFound",
             type: "error"
         }
     }

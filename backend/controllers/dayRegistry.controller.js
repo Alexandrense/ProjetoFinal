@@ -1,20 +1,20 @@
-const Sponsor = require('../models/sponsor.model');
+const DayRegistry = require('../models/dayRegistry.model');
 const {
     validationResult
 } = require('express-validator');
-const SponsorMessages = require("../messages/sponsor.messages");
+const DayRegistryMessages = require("../messages/dayRegistry.messages");
 
 exports.get = (req, res) => {
 
-    Sponsor.find(req.query).populate("comments.user", "name").exec((error, sponsors) => {
+    DayRegistry.find(req.query).populate("comments.user", "name").exec((error, dayRegistries) => {
         if (error) throw error;
 
-        let message = SponsorMessages.success.s2;
+        let message = DayRegistryMessages.success.s2;
 
-        if (sponsors.length < 0)
-            message = SponsorMessages.success.s5;
+        if (dayRegistries.length < 0)
+            message = DayRegistryMessages.success.s5;
 
-        message.body = sponsors;
+        message.body = dayRegistries;
         return res.status(message.http).send(message);
     });
 
@@ -24,7 +24,7 @@ exports.create = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    new Sponsor({
+    new DayRegistry({
         patient: req.body.patient,
         registryDate: req.body.registryDate,
         bath: req.body.bath,
@@ -32,11 +32,11 @@ exports.create = (req, res) => {
         temperature: req.body.temperature,
         dayClassification: req.body.dayClassification,
         description: req.body.description
-    }).save((error, sponsor) => {
+    }).save((error, dayRegistry) => {
         if (error) throw error;
-        let message = SponsorMessages.success.s0;
-        message.body = sponsor;
-        return res.header("location", "/sponsors/" + sponsor._id).status(message.http).send(message);
+        let message = DayRegistryMessages.success.s0;
+        message.body = dayRegistry;
+        return res.header("location", "/dayRegistries/" + dayRegistry._id).status(message.http).send(message);
     });
 }
 
@@ -44,18 +44,18 @@ exports.update = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Sponsor.findOneAndUpdate({
+    DayRegistry.findOneAndUpdate({
         _id: req.params.id
     }, {
         $set: req.body
     }, {
         new: true
-    }, (error, sponsor) => {
+    }, (error, dayRegistry) => {
         if (error) throw error;
-        if (!sponsor) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
+        if (!dayRegistry) return res.status(DayRegistryMessages.error.e0.http).send(DayRegistryMessages.error.e0);
 
-        let message = SponsorMessages.success.s1;
-        message.body = sponsor;
+        let message = DayRegistryMessages.success.s1;
+        message.body = dayRegistry;
         return res.status(message.http).send(message);
 
     });
@@ -65,12 +65,12 @@ exports.delete = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Sponsor.deleteOne({
+    DayRegistry.deleteOne({
         _id: req.params.id
     }, (error, result) => {
         if (error) throw error;
-        if (result.deletedCount <= 0) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-        return res.status(SponsorMessages.success.s3.http).send(SponsorMessages.success.s3);
+        if (result.deletedCount <= 0) return res.status(DayRegistryMessages.error.e0.http).send(DayRegistryMessages.error.e0);
+        return res.status(DayRegistryMessages.success.s3.http).send(DayRegistryMessages.success.s3);
 
     });
 }
@@ -80,13 +80,13 @@ exports.getOne = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Sponsor.findOne({
+    DayRegistry.findOne({
         _id: req.params.id
-    }).populate("comments.user", "name").exec((error, sponsor) => {
+    }).populate("comments.user", "name").exec((error, dayRegistry) => {
         if (error) throw error;
-        if (!sponsor) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-        let message = SponsorMessages.success.s2;
-        message.body = sponsor;
+        if (!dayRegistry) return res.status(DayRegistryMessages.error.e0.http).send(DayRegistryMessages.error.e0);
+        let message = DayRegistryMessages.success.s2;
+        message.body = dayRegistry;
         return res.status(message.http).send(message);
     });
 
@@ -96,7 +96,7 @@ exports.activate = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Sponsor.updateOne({
+    DayRegistry.updateOne({
         _id: req.params.id
     }, {
         $set: {
@@ -105,8 +105,8 @@ exports.activate = (req, res) => {
     }, (error, result) => {
         if (error) throw error;
 
-        if (result.n <= 0) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-        return res.status(SponsorMessages.success.s6.http).send(SponsorMessages.success.s6);
+        if (result.n <= 0) return res.status(DayRegistryMessages.error.e0.http).send(DayRegistryMessages.error.e0);
+        return res.status(DayRegistryMessages.success.s6.http).send(DayRegistryMessages.success.s6);
 
     });
 }
@@ -115,7 +115,7 @@ exports.deactivate = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Sponsor.updateOne({
+    DayRegistry.updateOne({
         _id: req.params.id
     }, {
         $set: {
@@ -124,8 +124,8 @@ exports.deactivate = (req, res) => {
     }, (error, result) => {
         if (error) throw error;
 
-        if (result.n <= 0) return res.status(SponsorMessages.error.e0.http).send(SponsorMessages.error.e0);
-        return res.status(SponsorMessages.success.s4.http).send(SponsorMessages.success.s4);
+        if (result.n <= 0) return res.status(DayRegistryMessages.error.e0.http).send(DayRegistryMessages.error.e0);
+        return res.status(DayRegistryMessages.success.s4.http).send(DayRegistryMessages.success.s4);
 
     });
 }

@@ -7,7 +7,7 @@ module.exports = {
             quiz: 'quizzes',
             user: 'users',
             user_levels: "user_levels",
-            sponsor: "sponsors",
+            dayRegistry: "dayregistries",
             patient: "patients"
         }
     },

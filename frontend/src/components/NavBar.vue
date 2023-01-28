@@ -15,26 +15,18 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto mr-5">
-          <b-nav-item :to="{ name: 'animals' }" :disabled="!isUserLoggedIn"
-            >ANIMAIS</b-nav-item
-          >
-          <b-nav-item :to="{ name: 'quizzes' }" :disabled="!isUserLoggedIn"
-            >QUIZZES</b-nav-item
-          >
-          <div v-if="isUserLoggedIn">
-            <div v-if="getUserType === 'user'">
-              <b-nav-item :to="{ name: 'profile' }">PERFIL</b-nav-item>
-            </div>
-            <div v-else>
-              <b-nav-item :to="{ name: 'admin' }">ADMIN</b-nav-item>
-              <b-nav-item :to="{ name: 'admin/users' }">UTILIZADORES</b-nav-item>
-              <b-nav-item :to="{ name: 'admin/users' }">UTENTES</b-nav-item>
-            </div>
-          </div>
-          <div v-else>
-            <b-nav-item :to="{ name: 'login' }">LOGIN</b-nav-item>
-          </div>
+        <b-navbar-nav v-if="isUserLoggedIn" class="ml-auto mr-5">
+          <b-nav-item :to="{ name: 'listDays' }">REGISTO DIARIO</b-nav-item>
+          <b-navbar-nav v-if="getUserType === 'user'">
+            <b-nav-item :to="{ name: 'profile' }">PERFIL</b-nav-item>
+          </b-navbar-nav>
+          <b-navbar-nav v-else>
+            <b-nav-item :to="{ name: 'listUsers' }">UTILIZADORES</b-nav-item>
+            <b-nav-item :to="{ name: 'listPatients' }">UTENTES</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-nav>
+        <b-navbar-nav v-else>
+          <b-nav-item :to="{ name: 'login' }">LOGIN</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
