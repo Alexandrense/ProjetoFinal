@@ -26,6 +26,7 @@ exports.create = (req, res) => {
 
     new Sponsor({
         name: req.body.name,
+        patient: req.body.patient,
         registryDate: req.body.registryDate,
         bath: req.body.bath,
         bloodPressure: req.body.bloodPressure,

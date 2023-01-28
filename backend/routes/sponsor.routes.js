@@ -13,6 +13,7 @@ router.route('/')
     .get(AuthController.checkAuth, SponsorController.get)
     .post(AuthController.checkAuth, [
         body('name').isString(),
+        body('patient').isString(),
         body('registryDate').isISO8601(),
         body('bath').isString(),
         body('bloodPressure').isString(),

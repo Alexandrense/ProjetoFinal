@@ -4,6 +4,7 @@ const CONFIG = require('../config/config');
 
 const sponsorSchema = new Schema({
     name: String,
+    patient: String,
     registryDate: Date,
     bath: String,
     bloodPressure: String,

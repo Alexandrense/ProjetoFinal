@@ -2,7 +2,7 @@
   <!-- Portfolio Section -->
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Adicionar Sponsor" />
+      <HeaderPage title="Adicionar Registo Diário" />
 
       <!--FORM-->
       <b-row>
@@ -10,21 +10,57 @@
         <b-col>
           <form @submit.prevent="add">
             <div class="form-group">
+              <select id="sltGroup" class="form-control form-control-lg" v-model="animal" required>
+                <option value>-- SELECIONA UTENTE --</option>
+                <option v-for="option in patients" :key="option._id">
+                  {{ option.name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">              
+            <input
+              v-model="registryDate"
+              type="date"
+              onmouseenter="(this.type='date')"
+              onmouseleave="(this.type='text')"
+              class="form-control form-control-lg"
+              id="txtRegistryDate"
+              placeholder="data do registo"
+              required
+            />
+            </div>
+            <div class="form-group">
+              <select id="sltBath" class="form-control form-control-lg" v-model="bath" required>                
+                <option value>-- TOMOU BANHO? --</option>
+                <option value="não">NÃO</option>
+                <option value="sim">SIM</option>
+                <option value="recusou">RECUSOU</option>
+              </select>
+            </div>
+            <div class="form-group">
               <input
-                v-model="name"
+                v-model="bloodPressure"
                 type="text"
                 class="form-control form-control-lg"
-                id="txtName"
-                placeholder="escreve nome"
-                required
+                id="txtBloodPressure"
+                placeholder="escreve pressão sanguinea"
               />
             </div>
             <div class="form-group">
-              <select id="sltGroup" class="form-control form-control-lg" v-model="animal" required>
-                <option value>-- SELECIONA ANIMAL --</option>
-                <option v-for="option in animals" :key="option._id">
-                  {{ option.name }}
-                </option>
+              <input
+                v-model="temperature"
+                type="text"
+                class="form-control form-control-lg"
+                id="txtTemperature"
+                placeholder="escreve temperatura corporal"
+              />
+            </div>
+            <div class="form-group">
+              <select id="sltDayClassification" class="form-control form-control-lg" v-model="dayClassification">                
+                <option value>-- COMO FOI O DIA DO UTENTE? --</option>
+                <option value="RUIM">RUIM</option>
+                <option value="BOM">BOM</option>
+                <option value="ÓTIMO">ÓTIMO</option>
               </select>
             </div>
             <div class="form-group">
@@ -32,7 +68,7 @@
                 id="txtDescription"
                 class="form-control form-control-lg"
                 placeholder="escreve mensagem do sponsor"
-                cols="30"
+                cols="20"
                 rows="10"
                 v-model="message"
                 required
@@ -56,7 +92,7 @@
 
 <script>
 import { ADD_SPONSOR } from "@/store/sponsors/sponsor.constants";
-import { FETCH_ANIMALS } from "@/store/animals/animal.constants";
+import { FETCH_EXPERTS } from "@/store/experts/expert.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import router from "@/router";
 import { mapGetters } from "vuex";
@@ -71,20 +107,20 @@ export default {
       name: "",
       animal: "",
       message: "",
-      animals: [],
+      patients: [],
       sortType: 1
     };
   },
   computed: {
     ...mapGetters("sponsor", ["getSponsors", "getMessage"]),
-    ...mapGetters("animal", ["getAnimals"])
+    ...mapGetters("expert", ["getExperts"])
   },
   methods: {    
-    fetchAnimals() {
-      this.$store.dispatch(`animal/${FETCH_ANIMALS}`).then(
+    fetchPatients() {
+      this.$store.dispatch(`expert/${FETCH_EXPERTS}`).then(
         () => {
-          this.animals = this.getAnimals;
-          this.animals.sort(this.compareNames);
+          this.patients = this.getExperts;
+          this.patients.sort(this.compareNames);
         },
         err => {
           this.$alert(`${err.message}`, "Erro", "error");
@@ -109,7 +145,7 @@ export default {
     }
   },
   created() {
-    this.fetchAnimals();
+    this.fetchPatients();
   }
 };
 

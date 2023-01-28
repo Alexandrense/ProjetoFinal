@@ -1,7 +1,7 @@
 <template>
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Gestão de Sponsors" />
+      <HeaderPage title="Gestão de Registos Diários" />
       <!--MENU TOPO-->
       <b-row class="mb-4">
         <b-col cols="2"></b-col>
@@ -28,18 +28,18 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">
-                  NOME
+                  Data
                   <i class="fas fa-arrow-up" v-if="sortType===1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
-                <th scope="col">Animal</th>              
-                <th scope="col">AÇÕES</th>
+                <th scope="col">Utente</th>              
+                <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="sponsor of sponsors" :key="sponsor._id">
                 <td class="pt-4">{{showHumanDate(sponsor.registryDate)}}</td>             
-                <td class="pt-4">{{sponsor.animal}}</td>
+                <td class="pt-4">{{sponsor.patient}}</td>
                 <td>
                   <router-link
                     :to="{name:'editSponsor', params:{sponsorId: sponsor._id}}"
