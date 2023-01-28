@@ -11,11 +11,11 @@
             <AdminOptionBox routeName="listPatients" iconName="microscope"  title="Utentes"/>
           </b-card-group>
           <b-card-group deck class="mt-3">
-            <AdminOptionBox routeName="listQuizzes" iconName="file-alt"  title="Quizzes"/>
+            <AdminOptionBox routeName="listDays" iconName="grin-stars"  title="Registo Diário"/>
             <AdminOptionBox routeName="listQuestions" iconName="question-circle"  title="Questões"/>
           </b-card-group>
           <b-card-group deck class="mt-3">
-            <AdminOptionBox routeName="listSponsors" iconName="grin-stars"  title="Sponsors"/>
+            <AdminOptionBox routeName="listQuizzes" iconName="file-alt"  title="Quizzes"/>
             <AdminOptionBox routeName="listAnimals" iconName="dog"  title="Animais"/>
           </b-card-group>
         </b-col>

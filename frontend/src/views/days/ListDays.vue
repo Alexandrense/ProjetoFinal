@@ -7,11 +7,11 @@
         <b-col cols="2"></b-col>
         <b-col>
           <router-link
-            :to="{name:'addSponsor'}"
+            :to="{name:'addDay'}"
             tag="button"
             class="btn btn-outline-success mr-2 mt-2"
           >
-            <i class="fas fa-plus-square"></i> ADICIONAR SPONSOR
+            <i class="fas fa-plus-square"></i> ADICIONAR REGISTO DIÁRIO
           </router-link>
           <router-link :to="{name:'admin'}" tag="button" class="btn btn-outline-info mr-2 mt-2">
             <i class="fas fa-bars"></i> MENU PRINCIPAL
@@ -42,7 +42,7 @@
                 <td class="pt-4">{{sponsor.patient}}</td>
                 <td>
                   <router-link
-                    :to="{name:'editSponsor', params:{sponsorId: sponsor._id}}"
+                    :to="{name:'editDay', params:{sponsorId: sponsor._id}}"
                     tag="button"
                     class="btn btn-outline-success mr-2 mt-2"
                   >

@@ -1,17 +1,15 @@
 <template>
-  <!-- Portfolio Section -->
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Adicionar Registo Diário" />
+      <HeaderPage title="Editar Registo" />
 
       <!--FORM-->
       <b-row>
         <b-col cols="2"></b-col>
-        <b-col>
-          <form @submit.prevent="add">
+        <b-col cols="8">
+          <form @submit.prevent="update">
             <div class="form-group">
-              <select id="sltGroup" class="form-control form-control-lg" v-model="animal" required>
-                <option value>-- SELECIONA UTENTE --</option>
+              <select id="sltUtente" class="form-control form-control-lg" v-model="sponsor.patient" placeholder="utente" required>
                 <option v-for="option in patients" :key="option._id">
                   {{ option.name }}
                 </option>
@@ -19,18 +17,18 @@
             </div>
             <div class="form-group">              
             <input
-              v-model="registryDate"
+              v-model="sponsor.registryDate"
               type="date"
               onmouseenter="(this.type='date')"
               onmouseleave="(this.type='text')"
               class="form-control form-control-lg"
-              id="txtRegistryDate"
+              id="txtBirthDate"
               placeholder="data do registo"
               required
             />
             </div>
             <div class="form-group">
-              <select id="sltBath" class="form-control form-control-lg" v-model="bath" required>                
+              <select id="sltBath" class="form-control form-control-lg" v-model="sponsor.bath" required>                
                 <option value>-- TOMOU BANHO? --</option>
                 <option value="não">NÃO</option>
                 <option value="sim">SIM</option>
@@ -39,24 +37,24 @@
             </div>
             <div class="form-group">
               <input
-                v-model="bloodPressure"
+                v-model="sponsor.bloodPressure"
                 type="text"
                 class="form-control form-control-lg"
-                id="txtBloodPressure"
+                id="txtName"
                 placeholder="escreve pressão sanguinea"
               />
             </div>
             <div class="form-group">
               <input
-                v-model="temperature"
+                v-model="sponsor.temperature"
                 type="text"
                 class="form-control form-control-lg"
-                id="txtTemperature"
+                id="txtName"
                 placeholder="escreve temperatura corporal"
               />
             </div>
             <div class="form-group">
-              <select id="sltDayClassification" class="form-control form-control-lg" v-model="dayClassification">                
+              <select id="sltDayClassification" class="form-control form-control-lg" v-model="sponsor.dayClassification">                
                 <option value>-- COMO FOI O DIA DO UTENTE? --</option>
                 <option value="RUIM">RUIM</option>
                 <option value="BOM">BOM</option>
@@ -68,20 +66,23 @@
                 id="txtDescription"
                 class="form-control form-control-lg"
                 placeholder="escreve mensagem do sponsor"
-                cols="20"
-                rows="10"
-                v-model="message"
+                cols="30"
+                rows="5"
+                v-model="sponsor.description"
                 required
               ></textarea>
             </div>
-            
+           
             <button type="submit" class="btn btn-outline-success btn-lg mr-2">
-              <i class="fas fa-plus-square"></i>  ADICIONAR</button>
+              <i class="fas fa-edit"></i> ATUALIZAR
+            </button>
             <router-link
-              :to="{name: 'listSponsors'}"
+              :to="{name: 'listDays'}"
               tag="button"
               class="btn btn-outline-danger btn-lg"
-            ><i class="fas fa-window-close"></i>  CANCELAR</router-link>
+            >
+              <i class="fas fa-window-close"></i> CANCELAR
+            </router-link>
           </form>
         </b-col>
         <b-col cols="2"></b-col>
@@ -91,32 +92,34 @@
 </template>
 
 <script>
-import { ADD_SPONSOR } from "@/store/sponsors/sponsor.constants";
+import { EDIT_SPONSOR } from "@/store/sponsors/sponsor.constants";
 import { FETCH_EXPERTS } from "@/store/experts/expert.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import router from "@/router";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "AddSponsor",
+  name: "EditSponsor",
   components: {
     HeaderPage
   },
   data: () => {
     return {
-      name: "",
-      animal: "",
-      message: "",
+      sponsor: {},
       patients: [],
       sortType: 1
     };
   },
   computed: {
-    ...mapGetters("sponsor", ["getSponsors", "getMessage"]),
+    ...mapGetters("sponsor", ["getSponsorsById", "getMessage"]),
     ...mapGetters("expert", ["getExperts"])
   },
-  methods: {    
-    fetchPatients() {
+  methods: {
+    removeComments() {
+      this.sponsor.comments.length = 0
+      this.$alert("Comentários removidos, clique em atualizar!", "Comentários!", "success");
+    },
+    fetchAnimals() {
       this.$store.dispatch(`expert/${FETCH_EXPERTS}`).then(
         () => {
           this.patients = this.getExperts;
@@ -132,11 +135,11 @@ export default {
       else if (u1.name < u2.name) return -1 * this.sortType;
       else return 0;
     },
-    add() {
-      this.$store.dispatch(`sponsor/${ADD_SPONSOR}`, this.$data).then(
+    update() {
+      this.$store.dispatch(`sponsor/${EDIT_SPONSOR}`, this.$data.sponsor).then(
         () => {
-          this.$alert(this.getMessage, "Sponsor adicionado!", "success");
-          router.push({ name: "listSponsors" });
+          this.$alert(this.getMessage, "Sponsor atualizado!", "success");
+          router.push({ name: "listDays" });
         },
         err => {
           this.$alert(`${err.message}`, "Erro", "error");
@@ -145,8 +148,16 @@ export default {
     }
   },
   created() {
-    this.fetchPatients();
+    this.sponsor = this.getSponsorsById(this.$route.params.sponsorId);
+    this.sponsor.registryDate = this.sponsor.registryDate.split('T')[0];
+    this.fetchAnimals();
   }
 };
-
 </script>
+
+<style scoped>
+.center_div {
+  margin: 0 auto;
+  width: 80%;
+}
+</style>

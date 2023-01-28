@@ -75,9 +75,9 @@ const routes = [
     component: () => import("@/views/animals/ListAnimals.vue")
   },
   {
-    path: "/admin/sponsors",
-    name: "listSponsors",
-    component: () => import("@/views/sponsors/ListSponsors.vue")
+    path: "/admin/days",
+    name: "listDays",
+    component: () => import("@/views/days/ListDays.vue")
   },
   {
     path: "/admin/patients",
@@ -95,14 +95,14 @@ const routes = [
     component: () => import("@/views/animals/AddAnimal.vue")
   },
   {
-    path: "/admin/sponsors/add",
-    name: "addSponsor",
-    component: () => import("@/views/sponsors/AddSponsor.vue")
+    path: "/admin/days/add",
+    name: "addDay",
+    component: () => import("@/views/days/AddDay.vue")
   },  
   {
-    path: "/admin/sponsors/:sponsorId",
-    name: "editSponsor",
-    component: () => import("@/views/sponsors/EditSponsor.vue")
+    path: "/admin/days/:sponsorId",
+    name: "editDay",
+    component: () => import("@/views/days/EditDay.vue")
   },
   {
     path: "/admin/patients/add",

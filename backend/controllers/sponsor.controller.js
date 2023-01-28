@@ -25,7 +25,6 @@ exports.create = (req, res) => {
     if (errors.length > 0) return res.status(406).send(errors);
 
     new Sponsor({
-        name: req.body.name,
         patient: req.body.patient,
         registryDate: req.body.registryDate,
         bath: req.body.bath,
