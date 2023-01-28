@@ -69,6 +69,14 @@
               />
             </div>
            
+
+            <button
+              @click="addQuestion"
+              type="button"
+              class="btn btn-outline-warning mr-2"
+            ><i class="fas fa-plus-square"></i> ADICIONAR UTILIZADOR AO UTENTE</button>
+            <br><br>
+
             <div v-if="quiz.users.length">
               <div class="row">
                 <div class="col-md-9">
@@ -109,9 +117,7 @@
                 </div>
               </div>
             </div>
-            <button @click="addQuestion" type="button" class="btn btn-outline-success mr-2">
-              <i class="fas fa-plus-square"></i> ADICIONAR QUESTÕES
-            </button>
+            
 
             <button type="submit" class="btn btn-outline-success mr-2">
               <i class="fas fa-save"></i> ATUALIZAR
@@ -139,7 +145,7 @@ import { FETCH_USERS } from "@/store/users/user.constants";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "EditQuiz",
+  name: "EditPatient",
   components: {
     HeaderPage
   },

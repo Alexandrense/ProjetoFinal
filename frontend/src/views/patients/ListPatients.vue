@@ -31,18 +31,18 @@
                   <i class="fas fa-arrow-up" v-if="sortType===1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
+                <th scope="col">Idade</th>  
                 <th scope="col">Contato</th>
                 <th scope="col">Telefone</th>  
-                <th scope="col">Idade</th>                    
                 <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="patient of patients" :key="patient._id">
-                <td class="pt-4">{{patient.name}}</td>             
+                <td class="pt-4">{{patient.name}}</td>
+                <td class="pt-4">{{calculateAge(patient.birth_date)}}</td>             
                 <td class="pt-4">{{patient.contactName}}</td>
                 <td class="pt-4">{{patient.contactPhone}}</td>
-                <td class="pt-4">{{calculateAge(patient.birth_date)}}</td>
                 <td>
                   <router-link
                     :to="{name:'editPatient', params:{quizId: patient._id}}"
