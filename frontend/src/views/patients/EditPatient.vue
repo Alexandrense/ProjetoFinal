@@ -171,8 +171,8 @@ export default {
         .dispatch(`quiz/${EDIT_QUIZ}`, this.$data.quiz)
         .then(
           () => {
-            this.$alert(this.getMessage, "Quiz atualizado!","success");
-            router.push({name: 'listQuizzes'});
+            this.$alert(this.getMessage, "Utente atualizado!","success");
+            router.push({name: 'listPatients'});
           },
           err => {
             this.$alert(`${err.message}`, "Erro", "error");

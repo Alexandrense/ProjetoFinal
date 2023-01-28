@@ -38,21 +38,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="quiz of quizzes" :key="quiz._id">
-                <td class="pt-4">{{quiz.name}}</td>             
-                <td class="pt-4">{{quiz.contactName}}</td>
-                <td class="pt-4">{{quiz.contactPhone}}</td>
-                <td class="pt-4">{{calculateAge(quiz.birth_date)}}</td>
+              <tr v-for="patient of patients" :key="patient._id">
+                <td class="pt-4">{{patient.name}}</td>             
+                <td class="pt-4">{{patient.contactName}}</td>
+                <td class="pt-4">{{patient.contactPhone}}</td>
+                <td class="pt-4">{{calculateAge(patient.birth_date)}}</td>
                 <td>
                   <router-link
-                    :to="{name:'editPatient', params:{quizId: quiz._id}}"
+                    :to="{name:'editPatient', params:{quizId: patient._id}}"
                     tag="button"
                     class="btn btn-outline-success mr-2 mt-2"
                   >
                     <i class="fas fa-edit"></i> EDITAR
                   </router-link>
                   <button
-                    @click="removeQuiz(quiz._id)"
+                    @click="removePatient(patient._id)"
                     type="button"
                     class="btn btn-outline-danger mr-2 mt-2"
                   >
@@ -74,13 +74,13 @@ import { FETCH_QUIZZES, REMOVE_QUIZ } from "@/store/quizzes/quiz.constants";
 import { mapGetters } from "vuex";
 import HeaderPage from "@/components/HeaderPage.vue"
 export default {
-  name: "ListQuizzes",
+  name: "ListPatients",
    components: {
     HeaderPage
   },
   data: function() {
     return {
-      quizzes: [],
+      patients: [],
       sortType: 1
     };
   },
@@ -88,10 +88,10 @@ export default {
     ...mapGetters("quiz", ["getQuizzes","getMessage"])
   },
   methods: {
-    fetchQuizzes() {
+    fetchPatients() {
       this.$store.dispatch(`quiz/${FETCH_QUIZZES}`).then( 
         () => {
-          this.quizzes = this.getQuizzes;
+          this.patients = this.getQuizzes;
         }, err => {
           this.$alert(`${err.message}`, 'Erro', 'error');
         });
@@ -107,7 +107,7 @@ export default {
       return "";
     },
     sort() {
-      this.quizzes.sort(this.compareNames)
+      this.patients.sort(this.compareNames)
       this.sortType *= -1      
     },
     compareNames(q1,q2) {
@@ -115,10 +115,10 @@ export default {
       else if(q1.name < q2.name) return -1 * this.sortType
       else return 0
     },
-    removeQuiz(id) {
+    removePatient(id) {
       this.$confirm(
         "Se sim, clique em OK",
-        "Deseja mesmo remover a questão?",
+        "Deseja mesmo remover?",
         "warning",
         { confirmButtonText: "OK", cancelButtonText: "Cancelar" }
       ).then(
@@ -126,10 +126,10 @@ export default {
           this.$store.dispatch(`quiz/${REMOVE_QUIZ}`, id).then(() => {
             this.$alert(
               this.getMessage,
-              "Questão removida!",
+              "Item removido!",
               "success"
             );
-            this.fetchQuizzes();
+            this.fetchPatients();
           });
         },
         () => {
@@ -139,7 +139,7 @@ export default {
     }
   },
   created() {
-    this.fetchQuizzes();
+    this.fetchPatients();
   }
 };
 </script>
