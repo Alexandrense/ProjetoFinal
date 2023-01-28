@@ -25,24 +25,9 @@ const routes = [
     component: () => import("@/views/Admin.vue")
   },
   {
-    path: "/admin/quizzes/add",
-    name: "addQuiz",
-    component: () => import("@/views/quizzes/AddQuiz.vue")
-  },
-  {
-    path: "/admin/quizzes/:quizId",
-    name: "editQuiz",
-    component: () => import("@/views/quizzes/EditQuiz.vue")
-  },
-  {
     path: "/admin/questions",
     name: "listQuestions",
     component: () => import("@/views/questions/ListQuestions.vue")
-  },
-  {
-    path: "/admin/quizzes",
-    name: "listQuizzes",
-    component: () => import("@/views/quizzes/ListQuizzes.vue")
   },
   {
     path: "/admin/questions/add",

@@ -4,7 +4,7 @@
       <HeaderPage title="Gestão de Utentes" />
       <!--MENU TOPO-->
       <b-row class="mb-4">
-        <b-col cols="2"></b-col>
+        <b-col cols="1"></b-col>
         <b-col>
           <router-link
             :to="{name:'addPatient'}"
@@ -17,12 +17,11 @@
             <i class="fas fa-bars"></i> MENU PRINCIPAL
           </router-link>
         </b-col>
-        <b-col cols="2"></b-col>
+        <b-col cols="1"></b-col>
       </b-row>
-
       <!--TABLE-->
       <b-row>
-        <b-col cols="2"></b-col>
+        <b-col cols="1"></b-col>
         <b-col>
           <table class="table table-striped">
             <thead class="thead-dark">
@@ -39,21 +38,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="expert of experts" :key="expert._id">
-                <td class="pt-4">{{expert.name}}</td>             
-                <td class="pt-4">{{expert.contactName}}</td>
-                <td class="pt-4">{{expert.contactPhone}}</td>
-                <td class="pt-4">{{calculateAge(expert.birth_date)}}</td>
+              <tr v-for="quiz of quizzes" :key="quiz._id">
+                <td class="pt-4">{{quiz.name}}</td>             
+                <td class="pt-4">{{quiz.contactName}}</td>
+                <td class="pt-4">{{quiz.contactPhone}}</td>
+                <td class="pt-4">{{calculateAge(quiz.birth_date)}}</td>
                 <td>
                   <router-link
-                    :to="{name:'editPatient', params:{expertId: expert._id}}"
+                    :to="{name:'editPatient', params:{quizId: quiz._id}}"
                     tag="button"
                     class="btn btn-outline-success mr-2 mt-2"
                   >
                     <i class="fas fa-edit"></i> EDITAR
-                  </router-link>                  
+                  </router-link>
                   <button
-                    @click="removeExpert(expert._id)"
+                    @click="removeQuiz(quiz._id)"
                     type="button"
                     class="btn btn-outline-danger mr-2 mt-2"
                   >
@@ -64,41 +63,38 @@
             </tbody>
           </table>
         </b-col>
-        <b-col cols="2"></b-col>
+        <b-col cols="1"></b-col>
       </b-row>
     </b-container>
   </section>
 </template>
 
 <script>
-import { FETCH_EXPERTS, REMOVE_EXPERT } from "@/store/experts/expert.constants";
-import HeaderPage from "@/components/HeaderPage.vue";
+import { FETCH_QUIZZES, REMOVE_QUIZ } from "@/store/quizzes/quiz.constants";
 import { mapGetters } from "vuex";
-
+import HeaderPage from "@/components/HeaderPage.vue"
 export default {
-  name: "ManageExperts",
-  components: {
+  name: "ListQuizzes",
+   components: {
     HeaderPage
   },
   data: function() {
     return {
-      experts: [],
+      quizzes: [],
       sortType: 1
     };
   },
   computed: {
-    ...mapGetters("expert", ["getExperts", "getMessage"])
+    ...mapGetters("quiz", ["getQuizzes","getMessage"])
   },
   methods: {
-    fetchExperts() {
-      this.$store.dispatch(`expert/${FETCH_EXPERTS}`).then(
+    fetchQuizzes() {
+      this.$store.dispatch(`quiz/${FETCH_QUIZZES}`).then( 
         () => {
-          this.experts = this.getExperts;
-        },
-        err => {
-          this.$alert(`${err.message}`, "Erro", "error");
-        }
-      );
+          this.quizzes = this.getQuizzes;
+        }, err => {
+          this.$alert(`${err.message}`, 'Erro', 'error');
+        });
     },
     calculateAge(birthDateField) {
       if (birthDateField) {
@@ -111,25 +107,29 @@ export default {
       return "";
     },
     sort() {
-      this.experts.sort(this.compareNames);
-      this.sortType *= -1;
+      this.quizzes.sort(this.compareNames)
+      this.sortType *= -1      
     },
-    compareNames(u1, u2) {
-      if (u1.name > u2.name) return 1 * this.sortType;
-      else if (u1.name < u2.name) return -1 * this.sortType;
-      else return 0;
+    compareNames(q1,q2) {
+      if(q1.name > q2.name) return 1 * this.sortType
+      else if(q1.name < q2.name) return -1 * this.sortType
+      else return 0
     },
-    removeExpert(id) {
+    removeQuiz(id) {
       this.$confirm(
         "Se sim, clique em OK",
-        "Deseja mesmo remover o utente?",
+        "Deseja mesmo remover a questão?",
         "warning",
         { confirmButtonText: "OK", cancelButtonText: "Cancelar" }
       ).then(
         () => {
-          this.$store.dispatch(`expert/${REMOVE_EXPERT}`, id).then(() => {
-            this.$alert(this.getMessage, "Utente removido!", "success");
-            this.fetchExperts();
+          this.$store.dispatch(`quiz/${REMOVE_QUIZ}`, id).then(() => {
+            this.$alert(
+              this.getMessage,
+              "Questão removida!",
+              "success"
+            );
+            this.fetchQuizzes();
           });
         },
         () => {
@@ -139,7 +139,7 @@ export default {
     }
   },
   created() {
-    this.fetchExperts();
+    this.fetchQuizzes();
   }
 };
 </script>

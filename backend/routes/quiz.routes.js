@@ -11,9 +11,13 @@ const AuthController = require("../controllers/auth.controller");
 
 router.route('/')
     .get(AuthController.checkAuth, QuizController.get)
-    .post(AuthController.checkAuth, [body('name').isString(),
-        body('points').isInt(),
-        body('level').isInt(),
+    .post(AuthController.checkAuth, [
+        body('name').isString(),
+        body('birth_date').isISO8601(),
+        body('sex').isString(),
+        body('contactName').isString(),
+        body('contactPhone').isString(),
+        body('contactMail').isString(),
         body('users.*').isMongoId()
     ], QuizController.create);
 

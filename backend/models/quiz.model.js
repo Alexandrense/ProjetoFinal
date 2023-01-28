@@ -4,26 +4,15 @@ const CONFIG = require('../config/config');
 
 const quizSchema = new Schema({
     name: String,
-    points: {
-        type: Number,
-        default: 0
-    },
-    level: {
-        type: Number,
-        default: 0
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    },
+    birth_date: Date,
+    sex: String,
+    contactName: String,
+    contactPhone: String,
+    contactMail: String,
     users: [{
         type: String,
         ref: CONFIG.mongodb.collections.user
-    }],
-    active: {
-        type: Boolean,
-        default: true
-    }
+    }]
 });
 
 module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.quiz, quizSchema);

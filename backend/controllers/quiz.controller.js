@@ -6,7 +6,7 @@ const QuizMessages = require("../messages/quiz.messages");
 
 exports.get = (req, res) => {
 
-    Quiz.find(req.query).populate("questions").exec((error, quizzes) => {
+    Quiz.find(req.query).populate("users").exec((error, quizzes) => {
         if (error) throw error;
         let message = QuizMessages.success.s2;
 

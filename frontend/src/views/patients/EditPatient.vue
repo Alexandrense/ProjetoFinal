@@ -2,7 +2,6 @@
   <section class="page-section">
     <b-container>
       <HeaderPage title="Editar Utente" />
-
       <!--FORM-->
       <b-row>
         <b-col cols="2"></b-col>
@@ -10,7 +9,7 @@
           <form @submit.prevent="update">
             <div class="form-group">
               <input
-                v-model="expert.name"
+                v-model="quiz.name"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtName"
@@ -20,7 +19,7 @@
             </div>
             <div class="form-group">              
             <input
-              v-model="expert.birth_date"
+              v-model="quiz.birth_date"
               type="date"
               onmouseenter="(this.type='date')"
               onmouseleave="(this.type='text')"
@@ -31,7 +30,7 @@
             />
             </div>
             <div class="form-group">
-              <select id="sltSex" class="form-control form-control-lg" v-model="expert.sex">                
+              <select id="sltSex" class="form-control form-control-lg" v-model="quiz.sex">                
                 <option value>-- SELECIONA SEXO --</option>
                 <option value="masculino">Masculino</option>
                 <option value="feminino">Feminino</option>
@@ -40,7 +39,7 @@
 
             <div class="form-group">
               <input
-                v-model="expert.contactName"
+                v-model="quiz.contactName"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactName"
@@ -51,7 +50,7 @@
 
             <div class="form-group">
               <input
-                v-model="expert.contactPhone"
+                v-model="quiz.contactPhone"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactPhone"
@@ -61,7 +60,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="expert.contactMail"
+                v-model="quiz.contactMail"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtContactMail"
@@ -70,13 +69,57 @@
               />
             </div>
            
-            <button type="submit" class="btn btn-outline-success btn-lg mr-2">
-              <i class="fas fa-edit"></i> ATUALIZAR
+            <div v-if="quiz.users.length">
+              <div class="row">
+                <div class="col-md-9">
+                  <h4>Lista de questões</h4>
+                </div>
+                <div class="col-md-3">
+                  <h4>Ações</h4>
+                </div>
+              </div>
+            </div>
+            <div v-for="(question, index) in quiz.users" :key="question._id">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-md-9">
+                   <select
+                      v-model="question._id"
+                      :key="index"
+                      class="form-control"
+                      required
+                    >
+                      <option
+                        v-for="q in getQuestionsByLevel"
+                        :key="q._id"
+                        :value="q._id"
+                      >{{q.name}} ({{q.type}})</option>
+                    </select>
+                  </div>
+                 
+                  <div class="col-md-3">
+                    <button
+                      @click="removeQuestion(index)"
+                      type="button"
+                      class="btn btn-outline-danger mr-2"
+                    >
+                      <i class="fas fa-trash"></i> REMOVER
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button @click="addQuestion" type="button" class="btn btn-outline-success mr-2">
+              <i class="fas fa-plus-square"></i> ADICIONAR QUESTÕES
+            </button>
+
+            <button type="submit" class="btn btn-outline-success mr-2">
+              <i class="fas fa-save"></i> ATUALIZAR
             </button>
             <router-link
               :to="{name: 'listPatients'}"
               tag="button"
-              class="btn btn-outline-danger btn-lg"
+              class="btn btn-outline-danger"
             >
               <i class="fas fa-window-close"></i> CANCELAR
             </router-link>
@@ -89,57 +132,65 @@
 </template>
 
 <script>
-import { EDIT_EXPERT } from "@/store/experts/expert.constants";
-
-import HeaderPage from "@/components/HeaderPage.vue";
+import { EDIT_QUIZ } from "@/store/quizzes/quiz.constants";
 import router from "@/router";
+import HeaderPage from "@/components/HeaderPage.vue"
+import { FETCH_USERS } from "@/store/users/user.constants";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "EditExpert",
+  name: "EditQuiz",
   components: {
     HeaderPage
   },
   data: () => {
     return {
-      expert: {}
+      quiz: {},
+      myQuestions: []
     };
   },
   computed: {
-    ...mapGetters("expert", ["getExpertsById", "getMessage"]),
+    ...mapGetters("quiz", ["getQuizById", "getMessage"]),
+    ...mapGetters("user", ["getUsers"]),
+    getQuestionsByLevel() {
+      return this.myQuestions.filter(item => item.type != 'admin');
+    }
   },
   methods: {
-    removeComments() {
-      this.sponsor.comments.length = 0
-      this.$alert("Comentários removidos, clique em atualizar!", "Comentários!", "success");
-    },    
-    compareNames(u1, u2) {
-      if (u1.name > u2.name) return 1 * this.sortType;
-      else if (u1.name < u2.name) return -1 * this.sortType;
-      else return 0;
+    setPlaceHolder: index => {
+      return `insira a ${index}ª resposta`;
+    },
+    addQuestion() {
+      this.quiz.users.push({id:"" });
+    },
+    removeQuestion(index) {
+      this.quiz.users.splice(index, 1);
     },
     update() {
-      this.$store.dispatch(`expert/${EDIT_EXPERT}`, this.$data.expert).then(
-        () => {
-          this.$alert(this.getMessage, "Utente atualizado!", "success");
-          router.push({ name: "listPatients" });
-        },
-        err => {
-          this.$alert(`${err.message}`, "Erro", "error");
-        }
-      );
+      this.$store
+        .dispatch(`quiz/${EDIT_QUIZ}`, this.$data.quiz)
+        .then(
+          () => {
+            this.$alert(this.getMessage, "Quiz atualizado!","success");
+            router.push({name: 'listQuizzes'});
+          },
+          err => {
+            this.$alert(`${err.message}`, "Erro", "error");
+          }
+        );
     }
   },
   created() {
-    this.expert = this.getExpertsById(this.$route.params.expertId);
-    this.expert.birth_date = this.expert.birth_date.split('T')[0];
+    this.quiz = this.getQuizById(this.$route.params.quizId);
+    this.quiz.birth_date = this.quiz.birth_date.split('T')[0];
+    this.$store.dispatch(`user/${FETCH_USERS}`).then(
+      () => {
+        this.myQuestions = this.getUsers;
+      },
+      err => {
+        this.$alert(`${err.message}`, "Erro", "error");
+      }
+    );
   }
 };
 </script>
-
-<style scoped>
-.center_div {
-  margin: 0 auto;
-  width: 80%;
-}
-</style>
