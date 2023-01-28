@@ -8,7 +8,11 @@ const patientSchema = new Schema({
     sex: String,
     contactName: String,
     contactPhone: String,
-    contactMail: String
+    contactMail: String,
+    users: [{
+        type: String,
+        ref: CONFIG.mongodb.collections.user
+    }]
 });
 
 module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.patient, patientSchema);

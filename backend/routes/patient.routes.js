@@ -18,7 +18,7 @@ router.route('/')
         body('contactName').isString(),
         body('contactPhone').isString(),
         body('contactMail').isString(),
-        sanitizeBody('contactPhone').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical)
+        body('users.*').isMongoId()
     ], PatientController.create);
 
 router.route("/deactivate/:id")

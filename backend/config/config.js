@@ -3,8 +3,6 @@ module.exports = {
         uri: 'mongodb://localhost:27017/appcuidar',
         collections: {
             animal: 'animals',
-            question: 'questions',
-            quiz: 'quizzes',
             user: 'users',
             user_levels: "user_levels",
             dayRegistry: "dayregistries",

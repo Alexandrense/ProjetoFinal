@@ -6,9 +6,8 @@ const PatientMessages = require("../messages/patient.messages");
 
 exports.get = (req, res) => {
 
-    Patient.find(req.query).populate("comments.user", "name").exec((error, patients) => {
+    Patient.find(req.query).populate("users").exec((error, patients) => {
         if (error) throw error;
-
         let message = PatientMessages.success.s2;
 
         if (patients.length < 0)
@@ -30,12 +29,17 @@ exports.create = (req, res) => {
         sex: req.body.sex,
         contactName: req.body.contactName,
         contactPhone: req.body.contactPhone,
-        contactMail: req.body.contactMail
+        contactMail: req.body.contactMail,
+        users: req.body.users
     }).save((error, patient) => {
         if (error) throw error;
-        let message = PatientMessages.success.s0;
-        message.body = patient;
-        return res.header("location", "/patients/" + patient._id).status(message.http).send(message);
+        patient.populate("users", (error) => {
+            if (error) throw error;
+            let message = PatientMessages.success.s0;
+            message.body = patient;
+            return res.header("location", "/patients/" + patient._id).status(message.http).send(message);
+        });
+
     });
 }
 
@@ -52,11 +56,12 @@ exports.update = (req, res) => {
     }, (error, patient) => {
         if (error) throw error;
         if (!patient) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
-
-        let message = PatientMessages.success.s1;
-        message.body = patient;
-        return res.status(message.http).send(message);
-
+        patient.populate("users", (error) => {
+            if (error) throw error;
+            let message = PatientMessages.success.s1;
+            message.body = patient;
+            return res.status(message.http).send(message);
+        });
     });
 }
 
@@ -81,7 +86,7 @@ exports.getOne = (req, res) => {
 
     Patient.findOne({
         _id: req.params.id
-    }).populate("comments.user", "name").exec((error, patient) => {
+    }).populate("users").exec((error, patient) => {
         if (error) throw error;
         if (!patient) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
         let message = PatientMessages.success.s2;
@@ -103,7 +108,7 @@ exports.activate = (req, res) => {
         }
     }, (error, result) => {
         if (error) throw error;
-
+        
         if (result.n <= 0) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
         return res.status(PatientMessages.success.s6.http).send(PatientMessages.success.s6);
 
@@ -122,7 +127,7 @@ exports.deactivate = (req, res) => {
         }
     }, (error, result) => {
         if (error) throw error;
-
+        
         if (result.n <= 0) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
         return res.status(PatientMessages.success.s4.http).send(PatientMessages.success.s4);
 
