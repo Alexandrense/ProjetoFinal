@@ -15,31 +15,6 @@ const routes = [
     component: () => import("@/views/Login.vue")
   },
   {
-    path: "/register",
-    name: "register",
-    component: () => import("@/views/Register.vue")
-  },
-  {
-    path: "/admin",
-    name: "admin",
-    component: () => import("@/views/Admin.vue")
-  },
-  {
-    path: "/admin/questions",
-    name: "listQuestions",
-    component: () => import("@/views/questions/ListQuestions.vue")
-  },
-  {
-    path: "/admin/questions/add",
-    name: "addQuestion",
-    component: () => import("@/views/questions/AddQuestion.vue")
-  },
-  {
-    path: "/admin/questions/:questionId",
-    name: "editQuestion",
-    component: () => import("@/views/questions/EditQuestion.vue")
-  },
-  {
     path: "/admin/users",
     name: "listUsers",
     component: () => import("@/views/users/ListUsers.vue")
@@ -96,38 +71,6 @@ const routes = [
     path: "/profile/edit",
     name: "editProfile",
     component: () => import("@/views/EditProfile.vue"),
-    meta: {
-      rule: "user"
-    }
-  },
-  {
-    path: "/quizzes",
-    name: "quizzes",
-    component: () => import("@/views/Quizzes.vue"),
-    meta: {
-      rule: "user"
-    }
-  },
-  {
-    path: "/quizzes/:quizId",
-    name: "quiz",
-    component: () => import("@/views/Quiz.vue"),
-    meta: {
-      rule: "user"
-    }
-  },
-  {
-    path: "/animals",
-    name: "animals",
-    component: () => import("@/views/Animals.vue"),
-    meta: {
-      rule: "user"
-    }
-  },
-  {
-    path: "/animals/:animalId",
-    name: "animal",
-    component: () => import("@/views/Animal.vue"),
     meta: {
       rule: "user"
     }
