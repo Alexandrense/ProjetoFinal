@@ -2,7 +2,7 @@ import API_URL from './config.js'
 
 export const expertService = {
   async getExperts(token) {
-    let response = await fetch(`${API_URL}/experts`, {
+    let response = await fetch(`${API_URL}/patients`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const expertService = {
   },
 
   async addExpert(token, payload) {
-    const response = await fetch(`${API_URL}/experts`, {
+    const response = await fetch(`${API_URL}/patients`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export const expertService = {
   },
 
   async editExpert(token, payload) {
-    const response = await fetch(`${API_URL}/experts/${payload._id}`, {
+    const response = await fetch(`${API_URL}/patients/${payload._id}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const expertService = {
   },
   
   async removeExpert(token, id) {
-    const response = await fetch(`${API_URL}/experts/${id}`, {
+    const response = await fetch(`${API_URL}/patients/${id}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
