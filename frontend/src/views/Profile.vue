@@ -2,30 +2,28 @@
   <section class="page-section">
     <b-container>
       <b-card class="overflow-hidden mt-5" style="max-width: 1540px; ">
+        <HeaderPage :title="user.name.toUpperCase()" />
         <b-row>
           <b-col md="6" align="center">
-            <br />
-            <HeaderPage :title="user.name.toUpperCase()" />
-          </b-col>
-          <b-col md="6">
-            <b-card-body title="PERFIL" align="center">
-              <b-card-text align="left">
-                <h5>Dados pessoais</h5>
+            <b-card-body title="Dados pessoais" align="center">
+              <b-card-text >
                 <strong>Nome: </strong>{{user.name}}
                 <br />
                 <strong>Data de nascimento:</strong> {{setCurrentDateTime(user.birth_date)}}
                 <br />
                 <strong>Cidade:</strong> {{user.location.city}} | <strong>País:</strong> {{user.location.country}}
                 <br>
-                <strong>Descrição:</strong> {{user.description}}
-                <br />
-                <br />
-                <h5>Conta</h5>                
+              </b-card-text>
+            </b-card-body>
+          </b-col>
+          <b-col md="6">
+            <b-card-body title="Conta" align="center">
+              <b-card-text >
                 <strong>Data de registo:</strong> {{setCurrentDateTime(user.registration_date)}}
                 <br />
                 <strong>Username:</strong> {{user.auth.username}}
                 <br />
-                <strong>Tipo:</strong> {{user.type==='user'?'Utilizador normal':'Administrador'}}
+                <strong>Tipo:</strong> {{user.type}}
                 <br />
                 <br/>
                 

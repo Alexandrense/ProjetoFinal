@@ -129,7 +129,6 @@
 import HeaderPage from "@/components/HeaderPage.vue";
 import { EDIT_ANIMAL } from "@/store/animals/animal.constants";
 import { FETCH_SPONSORS } from "@/store/sponsors/sponsor.constants";
-import { FETCH_EXPERTS } from "@/store/experts/expert.constants";
 import { mapGetters } from "vuex";
 export default {
   name: "Animal",
@@ -153,17 +152,6 @@ export default {
     ...mapGetters(["getUserLevelByPoints"])
   },
   methods: {
-    fetchExperts(groupFilter) {
-      this.$store.dispatch(`expert/${FETCH_EXPERTS}`).then(
-        () => {      
-          this.experts = this.getExperts.filter(
-            expert => expert.group == groupFilter)
-        },
-        err => {
-          this.$alert(`${err.message}`, "Erro", "error");
-        }
-      );
-    },
     fetchSponsors(animalFilter) {
       this.$store.dispatch(`sponsor/${FETCH_SPONSORS}`).then(
         () => { 
@@ -250,7 +238,6 @@ export default {
   created() {    
     this.animal = this.getAnimalsById(this.$route.params.animalId);
     this.fetchSponsors(this.animal.name);
-    this.fetchExperts(this.animal.group);
   }
 };
 </script>

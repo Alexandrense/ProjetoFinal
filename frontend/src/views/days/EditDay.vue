@@ -93,7 +93,7 @@
 
 <script>
 import { EDIT_SPONSOR } from "@/store/sponsors/sponsor.constants";
-import { FETCH_EXPERTS } from "@/store/experts/expert.constants";
+import { FETCH_QUIZZES } from "@/store/quizzes/quiz.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import router from "@/router";
 import { mapGetters } from "vuex";
@@ -112,7 +112,7 @@ export default {
   },
   computed: {
     ...mapGetters("sponsor", ["getSponsorsById", "getMessage"]),
-    ...mapGetters("expert", ["getExperts"])
+    ...mapGetters("quiz", ["getQuizzes"])
   },
   methods: {
     removeComments() {
@@ -120,9 +120,9 @@ export default {
       this.$alert("Comentários removidos, clique em atualizar!", "Comentários!", "success");
     },
     fetchAnimals() {
-      this.$store.dispatch(`expert/${FETCH_EXPERTS}`).then(
+      this.$store.dispatch(`quiz/${FETCH_QUIZZES}`).then(
         () => {
-          this.patients = this.getExperts;
+          this.patients = this.getQuizzes;
           this.patients.sort(this.compareNames);
         },
         err => {

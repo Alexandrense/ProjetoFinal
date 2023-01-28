@@ -1,7 +1,7 @@
 <template>
   <section class="page-section">
     <b-container>
-      <HeaderPage title="Gestão de Registos Diários" />
+      <HeaderPage title="Registos Diários" />
       <!--MENU TOPO-->
       <b-row class="mb-4">
         <b-col cols="2"></b-col>
@@ -19,6 +19,21 @@
         </b-col>
         <b-col cols="2"></b-col>
       </b-row>
+      
+      <b-row class="mb-4">
+        <b-col cols="2"></b-col>
+          <b-col>
+            <div class="form-group">
+              <select id="sltUtente" class="form-control form-control-lg" v-model="filterPatient">
+                <option value>-- SELECIONE O UTENTE --</option>
+                <option v-for="option in patients" :key="option._id" :value="option._id">
+                  {{ option.name }}
+                </option>
+              </select>
+            </div>
+          </b-col>
+        <b-col cols="2"></b-col>
+      </b-row>
 
       <!--TABLE-->
       <b-row>
@@ -32,14 +47,14 @@
                   <i class="fas fa-arrow-up" v-if="sortType===1" @click="sort()"></i>
                   <i class="fas fa-arrow-down" v-else @click="sort()"></i>
                 </th>
-                <th scope="col">Utente</th>              
+                <th scope="col">Classificação</th>              
                 <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="sponsor of sponsors" :key="sponsor._id">
+              <tr v-for="sponsor of filteredRegistries" :key="sponsor._id">
                 <td class="pt-4">{{showHumanDate(sponsor.registryDate)}}</td>             
-                <td class="pt-4">{{sponsor.patient}}</td>
+                <td class="pt-4">{{sponsor.dayClassification}}</td>
                 <td>
                   <router-link
                     :to="{name:'editDay', params:{sponsorId: sponsor._id}}"
@@ -68,6 +83,7 @@
 
 <script>
 import { FETCH_SPONSORS, REMOVE_SPONSOR } from "@/store/sponsors/sponsor.constants";
+import { FETCH_QUIZZES } from "@/store/quizzes/quiz.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import { mapGetters } from "vuex";
 
@@ -79,13 +95,34 @@ export default {
   data: function() {
     return {
       sponsors: [],
+      patients: [],
+      filterPatient: "",
       sortType: 1
     };
   },
   computed: {
-    ...mapGetters("sponsor", ["getSponsors", "getMessage"])
+    ...mapGetters("sponsor", ["getSponsors", "getMessage"]),
+    ...mapGetters("quiz", ["getQuizzes"]),
+    filteredRegistries() {
+      return this.sponsors.filter(item => {
+        let filterGroupResult = true;
+        filterGroupResult = item.patient == this.filterPatient;
+        return filterGroupResult;
+      });
+    },
   },
   methods: {
+    fetchPatients() {
+      this.$store.dispatch(`quiz/${FETCH_QUIZZES}`).then(
+        () => {
+          this.patients = this.getQuizzes;
+          this.patients.sort(this.compareNames);
+        },
+        err => {
+          this.$alert(`${err.message}`, "Erro", "error");
+        }
+      );
+    },
     fetchSponsors() {
       this.$store.dispatch(`sponsor/${FETCH_SPONSORS}`).then(
         () => {
@@ -105,32 +142,7 @@ export default {
       else if (u1.name < u2.name) return -1 * this.sortType;
       else return 0;
     },
-
-    viewSponsor(id) {
-      const sponsor = this.sponsors.find(sponsor => sponsor._id === id);
-
-      this.$fire({
-        title: sponsor.name,
-        html: this.generateTemplate(sponsor),
-        imageUrl: sponsor.links[0].url,
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Imagem desconhecida"
-      });
-    },
-
-    generateTemplate(sponsor) {
-      let response = `
-          <h4>Animal:</b> ${sponsor.animal}</h4>        
-          <p>${sponsor.message}</p> 
-          <p>Elementos multimédia:
-        `;
-      for (const link of sponsor.links) {
-        response += ` <a href='${link.url}' target='_blank'>${link.types}</a>`;
-      }
-      response += `</p><p>Comentários: ${sponsor.comments.length} Avaliações: ${sponsor.evaluation.length}</p> `;
-      return response;
-    },
+    
     showHumanDate(dateField) {
       if (dateField) {
         return dateField.split('T')[0];
@@ -140,13 +152,13 @@ export default {
     removeSponsor(id) {
       this.$confirm(
         "Se sim, clique em OK",
-        "Deseja mesmo remover o sponsor?",
+        "Deseja mesmo remover o registo?",
         "warning",
         { confirmButtonText: "OK", cancelButtonText: "Cancelar" }
       ).then(
         () => {
           this.$store.dispatch(`sponsor/${REMOVE_SPONSOR}`, id).then(() => {
-            this.$alert(this.getMessage, "Sponsor removido!", "success");
+            this.$alert(this.getMessage, "Registo removido!", "success");
             this.fetchSponsors();
           });
         },
@@ -158,6 +170,7 @@ export default {
   },
   created() {
     this.fetchSponsors();
+    this.fetchPatients();
   }
 };
 </script>

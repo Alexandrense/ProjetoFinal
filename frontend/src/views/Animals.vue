@@ -53,7 +53,6 @@ import Animal from "@/components/Animal.vue";
 import HeaderPage from "@/components/HeaderPage.vue";
 import { FETCH_ANIMALS } from "@/store/animals/animal.constants";
 import { FETCH_SPONSORS } from "@/store/sponsors/sponsor.constants";
-import { FETCH_EXPERTS } from "@/store/experts/expert.constants";
 
 import { mapGetters } from "vuex";
 
@@ -109,16 +108,6 @@ export default {
     }
   },
   methods: {
-    fetchExperts() {
-      this.$store.dispatch(`expert/${FETCH_EXPERTS}`).then(
-        () => {
-          this.experts = this.getExperts;          
-        },
-        err => {
-          this.$alert(`${err.message}`, "Erro", "error");
-        }
-      );
-    },
     fetchSponsors() {
       this.$store.dispatch(`sponsor/${FETCH_SPONSORS}`).then(
         () => { 
@@ -146,7 +135,6 @@ export default {
   },
   created() {
     this.fetchSponsors();
-    this.fetchExperts();
     this.$store
       .dispatch(`animal/${FETCH_ANIMALS}`)
       .then(

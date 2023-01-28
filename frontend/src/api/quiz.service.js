@@ -2,7 +2,7 @@ import API_URL from './config.js'
 
 export const quizService = {
   async getQuizzes(token) {
-    const response = await fetch(`${API_URL}/quizzes`, {
+    const response = await fetch(`${API_URL}/patients`, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const quizService = {
   },
 
   async addQuiz(token, payload) {
-    const response = await fetch(`${API_URL}/quizzes`, {
+    const response = await fetch(`${API_URL}/patients`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export const quizService = {
   },
 
   async editQuiz(token, payload) {
-    const response = await fetch(`${API_URL}/quizzes/${payload._id}`, {
+    const response = await fetch(`${API_URL}/patients/${payload._id}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const quizService = {
   },
 
   async removeQuiz(token, id) {
-    const response = await fetch(`${API_URL}/quizzes/${id}`, {
+    const response = await fetch(`${API_URL}/patients/${id}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ function handleResponses(code) {
       message = "Não está autorizado a executar esta ação!"
       break;
     case 409:
-      message = "Já existe um utilizador com este username!"
+      message = "Já existe um utente com este username!"
       break;
     default:
       message = "Mensagem desconhecida"
