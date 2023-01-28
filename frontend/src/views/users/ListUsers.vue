@@ -115,7 +115,7 @@ export default {
       this.$fire({
         title: user.auth.username,
         html: this.generateTemplate(user),
-        imageUrl: require(`@/assets/avatars/${this.getUserLevelByPoints(user.gamification.points).avatar}.png`),
+        imageUrl: require(`@/assets/avatars/user.png`),
         imageWidth: 150,
         imageHeight: 150,
         imageAlt: "Imagem desconhecida"
@@ -124,13 +124,10 @@ export default {
 
     generateTemplate(user) {
       return `
-          <h5>${user.gamification.points} pontos (${this.getUserLevelByPoints(user.gamification.points).name})</h5>
-          <p>${user.description}</p>
           <p>
           <b>Nome:</b> ${user.name} <br>
-          <b>Tipo de utilizador:</b> ${user.type==="admin"?"Administrador":"Utilizador normal"} <br>
+          <b>Tipo de utilizador:</b> ${user.type} <br>
           <b>Data de registo:</b> ${this.formatDate(user.registration_date)} <br>
-          <b>Data de nascimento:</b> ${this.formatDate(user.birth_date)}<br>
           <b>Cidade:</b> ${user.location.city}<br>
           <b>País:</b> ${user.location.country}
           </p>

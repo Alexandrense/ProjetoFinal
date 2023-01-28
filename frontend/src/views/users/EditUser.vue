@@ -26,29 +26,7 @@
                 <option value="user">UTILIZADOR NORMAL</option>
               </select>
             </div>
-            <div class="form-group">
-            <input
-              v-model="user.birth_date"
-              type="date"
-              onmouseenter="(this.type='date')"
-              onmouseleave="(this.type='text')"
-              class="form-control form-control-lg"
-              id="txtBirthDate"
-              placeholder="escreve data de nascimento"
-              required
-            />
-            </div>
-            <div class="form-group">
-              <textarea
-                id="txtDescription"
-                class="form-control form-control-lg"
-                placeholder="escreve descrição"
-                cols="30"
-                rows="10"
-                v-model="user.description"
-                required
-              ></textarea>
-            </div>
+            
             <div class="form-group">
               <input
                 v-model="user.location.city"

@@ -28,29 +28,6 @@
               </select>
             </div>
             <div class="form-group">
-            <input
-              v-model="birth_date"
-              type="text"
-              onmouseenter="(this.type='date')"
-              onmouseleave="(this.type='text')"
-              class="form-control form-control-lg"
-              id="txtBirthDate"
-              placeholder="escreve data de nascimento"
-              required
-            />
-            </div>
-            <div class="form-group">
-              <textarea
-                id="txtDescription"
-                class="form-control form-control-lg"
-                placeholder="escreve descrição"
-                cols="30"
-                rows="10"
-                v-model="description"
-                
-              ></textarea>
-            </div>
-            <div class="form-group">
               <input
                 v-model="location.city"
                 type="text"

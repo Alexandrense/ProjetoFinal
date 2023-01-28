@@ -5,7 +5,7 @@
         <router-link
           :to="{ name: 'home' }"
           tag="img"
-          :src="require('@/assets/animalec_line.png')"
+          :src="require('@/assets/appcuidar_line.png')"
           style="width:250px; height:50px"
           title="Página principal do Animalec"
         />
@@ -22,25 +22,14 @@
           <b-nav-item :to="{ name: 'quizzes' }" :disabled="!isUserLoggedIn"
             >QUIZZES</b-nav-item
           >
-          <b-nav-item to="#contacts">CONTACTOS</b-nav-item>
           <div v-if="isUserLoggedIn">
             <div v-if="getUserType === 'user'">
-              <b-nav-item :to="{ name: 'profile' }">
-                <img
-                  class="avatar"
-                  :src="
-                    require(`@/assets/avatars/${
-                      this.getUserLevelByPoints(
-                        this.getProfile.gamification.points
-                      ).avatar
-                    }.png`)
-                  "
-                  :title="getProfileName"
-                />
-              </b-nav-item>
+              <b-nav-item :to="{ name: 'profile' }">PERFIL</b-nav-item>
             </div>
             <div v-else>
               <b-nav-item :to="{ name: 'admin' }">ADMIN</b-nav-item>
+              <b-nav-item :to="{ name: 'admin/users' }">UTILIZADORES</b-nav-item>
+              <b-nav-item :to="{ name: 'admin/users' }">UTENTES</b-nav-item>
             </div>
           </div>
           <div v-else>
