@@ -1,5 +1,5 @@
 {
-  "name": "api_fca_book2",
+  "name": "appcuidar_api",
   "version": "1.0.0",
   "description": "API advanced book",
   "main": "server.js",

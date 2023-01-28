@@ -104,7 +104,7 @@
         <b-col cols="2"></b-col>
       </b-row>
     </b-container>
-    <pre>{{$data}}</pre>
+    
   </section>
 </template>
 
