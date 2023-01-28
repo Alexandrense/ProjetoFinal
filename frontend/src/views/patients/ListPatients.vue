@@ -100,11 +100,10 @@ export default {
         }
       );
     },
-    
-    calculateAge(birthDate1) {
-      if (birthDate1) {
+    calculateAge(birthDateField) {
+      if (birthDateField) {
         let currentDate = new Date(); 
-        let birthDate = new Date(birthDate1);
+        let birthDate = new Date(birthDateField);
         let difference = currentDate - birthDate;
         let age = Math.floor(difference/31557600000);
         return age
@@ -120,42 +119,16 @@ export default {
       else if (u1.name < u2.name) return -1 * this.sortType;
       else return 0;
     },
-
-    viewSponsor(id) {
-      const sponsor = this.sponsors.find(sponsor => sponsor._id === id);
-
-      this.$fire({
-        title: sponsor.name,
-        html: this.generateTemplate(sponsor),
-        imageUrl: sponsor.links[0].url,
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Imagem desconhecida"
-      });
-    },
-
-    generateTemplate(sponsor) {
-      let response = `
-          <h4>Animal:</b> ${sponsor.animal}</h4>        
-          <p>${sponsor.message}</p> 
-          <p>Elementos multimédia:
-        `;
-      for (const link of sponsor.links) {
-        response += ` <a href='${link.url}' target='_blank'>${link.types}</a>`;
-      }
-      response += `</p><p>Comentários: ${sponsor.comments.length} Avaliações: ${sponsor.evaluation.length}</p> `;
-      return response;
-    },
     removeExpert(id) {
       this.$confirm(
         "Se sim, clique em OK",
-        "Deseja mesmo remover o especialista?",
+        "Deseja mesmo remover o utente?",
         "warning",
         { confirmButtonText: "OK", cancelButtonText: "Cancelar" }
       ).then(
         () => {
           this.$store.dispatch(`expert/${REMOVE_EXPERT}`, id).then(() => {
-            this.$alert(this.getMessage, "Especialista removido!", "success");
+            this.$alert(this.getMessage, "Utente removido!", "success");
             this.fetchExperts();
           });
         },

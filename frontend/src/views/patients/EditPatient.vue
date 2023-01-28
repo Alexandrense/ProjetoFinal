@@ -19,6 +19,7 @@
               />
             </div>
             <div class="form-group">
+              {{ expert.birth_date }}
             <input
               v-model="expert.birth_date"
               type="date"
@@ -121,8 +122,8 @@ export default {
     update() {
       this.$store.dispatch(`expert/${EDIT_EXPERT}`, this.$data.expert).then(
         () => {
-          this.$alert(this.getMessage, "Especialista atualizado!", "success");
-          router.push({ name: "listExperts" });
+          this.$alert(this.getMessage, "Utente atualizado!", "success");
+          router.push({ name: "listPatients" });
         },
         err => {
           this.$alert(`${err.message}`, "Erro", "error");
@@ -132,6 +133,7 @@ export default {
   },
   created() {
     this.expert = this.getExpertsById(this.$route.params.expertId);
+    this.expert.birth_date = this.expert.birth_date.split('T')[0];
   }
 };
 </script>
