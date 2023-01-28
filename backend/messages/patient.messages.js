@@ -1,23 +1,23 @@
 module.exports = {
     success: {
         s0: {
-            code: "ExpertCreated",
+            code: "PatientCreated",
             http: 201,
             type: "success"
         },
         s1: {
             http: 200,
-            code: "ExpertUpdated",
+            code: "PatientUpdated",
             type: "success"
         },
         s2: {
             http: 200,
-            code: "ExpertFound",
+            code: "PatientFound",
             type: "success"
         },
         s3: {
             http: 200,
-            code: "ExpertDeleted",
+            code: "PatientDeleted",
             type: "success"
         },
         s4: {
@@ -27,7 +27,7 @@ module.exports = {
         },
         s5: {
             http: 204,
-            code: "NoExperts",
+            code: "NoPatients",
             type: "success"
         },
         s6: {
@@ -39,7 +39,7 @@ module.exports = {
     error: {
         e0: {
             http: 404,
-            code: "ExpertNotFound",
+            code: "PatientNotFound",
             type: "error"
         }
     }

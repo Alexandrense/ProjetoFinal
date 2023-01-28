@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-const ExpertController = require('../controllers/expert.controller');
+const PatientController = require('../controllers/patient.controller');
 const {
     body,
     param,
@@ -10,7 +10,7 @@ const CONFIG = require("../config/config");
 const AuthController = require("../controllers/auth.controller");
 
 router.route('/')
-    .get(AuthController.checkAuth, ExpertController.get)
+    .get(AuthController.checkAuth, PatientController.get)
     .post(AuthController.checkAuth, [
         body('name').isString(),
         body('birth_date').isISO8601(),
@@ -19,17 +19,17 @@ router.route('/')
         body('contactPhone').isString(),
         body('contactMail').isString(),
         sanitizeBody('contactPhone').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical)
-    ], ExpertController.create);
+    ], PatientController.create);
 
 router.route("/deactivate/:id")
-    .put(AuthController.checkAuth, [param("id").isMongoId()], ExpertController.deactivate);
+    .put(AuthController.checkAuth, [param("id").isMongoId()], PatientController.deactivate);
 
 router.route("/activate/:id")
-    .put(AuthController.checkAuth, [param("id").isMongoId()], ExpertController.activate);
+    .put(AuthController.checkAuth, [param("id").isMongoId()], PatientController.activate);
 
 router.route('/:id')
-    .get(AuthController.checkAuth, [param("id").isMongoId()], ExpertController.getOne)
-    .put(AuthController.checkAuth, [param("id").isMongoId()], ExpertController.update)
-    .delete(AuthController.checkAuth, [param("id").isMongoId()], ExpertController.delete);
+    .get(AuthController.checkAuth, [param("id").isMongoId()], PatientController.getOne)
+    .put(AuthController.checkAuth, [param("id").isMongoId()], PatientController.update)
+    .delete(AuthController.checkAuth, [param("id").isMongoId()], PatientController.delete);
 
 module.exports = router;

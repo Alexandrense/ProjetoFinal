@@ -1,20 +1,20 @@
-const Expert = require('../models/expert.model');
+const Patient = require('../models/patient.model');
 const {
     validationResult
 } = require('express-validator');
-const ExpertMessages = require("../messages/expert.messages");
+const PatientMessages = require("../messages/patient.messages");
 
 exports.get = (req, res) => {
 
-    Expert.find(req.query).populate("comments.user", "name").exec((error, experts) => {
+    Patient.find(req.query).populate("comments.user", "name").exec((error, patients) => {
         if (error) throw error;
 
-        let message = ExpertMessages.success.s2;
+        let message = PatientMessages.success.s2;
 
-        if (experts.length < 0)
-            message = ExpertMessages.success.s5;
+        if (patients.length < 0)
+            message = PatientMessages.success.s5;
 
-        message.body = experts;
+        message.body = patients;
         return res.status(message.http).send(message);
     });
 
@@ -24,18 +24,18 @@ exports.create = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    new Expert({
+    new Patient({
         name: req.body.name,
         birth_date: req.body.birth_date,
         sex: req.body.sex,
         contactName: req.body.contactName,
         contactPhone: req.body.contactPhone,
         contactMail: req.body.contactMail
-    }).save((error, expert) => {
+    }).save((error, patient) => {
         if (error) throw error;
-        let message = ExpertMessages.success.s0;
-        message.body = expert;
-        return res.header("location", "/experts/" + expert._id).status(message.http).send(message);
+        let message = PatientMessages.success.s0;
+        message.body = patient;
+        return res.header("location", "/patients/" + patient._id).status(message.http).send(message);
     });
 }
 
@@ -43,18 +43,18 @@ exports.update = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Expert.findOneAndUpdate({
+    Patient.findOneAndUpdate({
         _id: req.params.id
     }, {
         $set: req.body
     }, {
         new: true
-    }, (error, expert) => {
+    }, (error, patient) => {
         if (error) throw error;
-        if (!expert) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
+        if (!patient) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
 
-        let message = ExpertMessages.success.s1;
-        message.body = expert;
+        let message = PatientMessages.success.s1;
+        message.body = patient;
         return res.status(message.http).send(message);
 
     });
@@ -64,12 +64,12 @@ exports.delete = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Expert.deleteOne({
+    Patient.deleteOne({
         _id: req.params.id
     }, (error, result) => {
         if (error) throw error;
-        if (result.deletedCount <= 0) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
-        return res.status(ExpertMessages.success.s3.http).send(ExpertMessages.success.s3);
+        if (result.deletedCount <= 0) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
+        return res.status(PatientMessages.success.s3.http).send(PatientMessages.success.s3);
 
     });
 }
@@ -79,13 +79,13 @@ exports.getOne = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Expert.findOne({
+    Patient.findOne({
         _id: req.params.id
-    }).populate("comments.user", "name").exec((error, expert) => {
+    }).populate("comments.user", "name").exec((error, patient) => {
         if (error) throw error;
-        if (!expert) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
-        let message = ExpertMessages.success.s2;
-        message.body = expert;
+        if (!patient) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
+        let message = PatientMessages.success.s2;
+        message.body = patient;
         return res.status(message.http).send(message);
     });
 
@@ -95,7 +95,7 @@ exports.activate = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Expert.updateOne({
+    Patient.updateOne({
         _id: req.params.id
     }, {
         $set: {
@@ -104,8 +104,8 @@ exports.activate = (req, res) => {
     }, (error, result) => {
         if (error) throw error;
 
-        if (result.n <= 0) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
-        return res.status(ExpertMessages.success.s6.http).send(ExpertMessages.success.s6);
+        if (result.n <= 0) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
+        return res.status(PatientMessages.success.s6.http).send(PatientMessages.success.s6);
 
     });
 }
@@ -114,7 +114,7 @@ exports.deactivate = (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
 
-    Expert.updateOne({
+    Patient.updateOne({
         _id: req.params.id
     }, {
         $set: {
@@ -123,8 +123,8 @@ exports.deactivate = (req, res) => {
     }, (error, result) => {
         if (error) throw error;
 
-        if (result.n <= 0) return res.status(ExpertMessages.error.e0.http).send(ExpertMessages.error.e0);
-        return res.status(ExpertMessages.success.s4.http).send(ExpertMessages.success.s4);
+        if (result.n <= 0) return res.status(PatientMessages.error.e0.http).send(PatientMessages.error.e0);
+        return res.status(PatientMessages.success.s4.http).send(PatientMessages.success.s4);
 
     });
 }

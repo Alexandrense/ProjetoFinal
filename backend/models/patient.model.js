@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const CONFIG = require('../config/config');
 
-const expertSchema = new Schema({
+const patientSchema = new Schema({
     name: String,
     birth_date: Date,
     sex: String,
@@ -11,4 +11,4 @@ const expertSchema = new Schema({
     contactMail: String
 });
 
-module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.expert, expertSchema);
+module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.patient, patientSchema);
