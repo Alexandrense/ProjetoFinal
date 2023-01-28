@@ -5,7 +5,6 @@ import moduleBase from "./module";
 import moduleAuth from "./auth/auth.module";
 import moduleUser from "./users/user.module";
 import moduleQuiz from "./quizzes/quiz.module";
-import moduleQuestion from "./questions/question.module";
 import moduleSponsor from "./sponsors/sponsor.module";
 
 Vue.use(Vuex);
@@ -19,7 +18,6 @@ export default new Vuex.Store({
     auth: moduleAuth,
     user: moduleUser,
     quiz: moduleQuiz,
-    question: moduleQuestion,
     sponsor: moduleSponsor,
   }
 });
