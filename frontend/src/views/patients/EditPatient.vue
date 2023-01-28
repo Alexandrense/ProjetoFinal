@@ -18,8 +18,7 @@
                 required
               />
             </div>
-            <div class="form-group">
-              {{ expert.birth_date }}
+            <div class="form-group">              
             <input
               v-model="expert.birth_date"
               type="date"

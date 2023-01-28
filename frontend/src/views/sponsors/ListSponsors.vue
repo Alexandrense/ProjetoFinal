@@ -38,7 +38,7 @@
             </thead>
             <tbody>
               <tr v-for="sponsor of sponsors" :key="sponsor._id">
-                <td class="pt-4">{{sponsor.name}}</td>             
+                <td class="pt-4">{{showHumanDate(sponsor.registryDate)}}</td>             
                 <td class="pt-4">{{sponsor.animal}}</td>
                 <td>
                   <router-link
@@ -131,6 +131,12 @@ export default {
       response += `</p><p>Comentários: ${sponsor.comments.length} Avaliações: ${sponsor.evaluation.length}</p> `;
       return response;
     },
+    showHumanDate(dateField) {
+      if (dateField) {
+        return dateField.split('T')[0];
+      }
+      return "";
+    },    
     removeSponsor(id) {
       this.$confirm(
         "Se sim, clique em OK",

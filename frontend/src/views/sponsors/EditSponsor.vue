@@ -19,12 +19,59 @@
               />
             </div>
             <div class="form-group">
-              <select id="sltGroup" class="form-control form-control-lg" v-model="sponsor.animal">
+              <select id="sltUtente" class="form-control form-control-lg" v-model="sponsor.patient" placeholder="utente" required>
                 <option v-for="option in animals" :key="option._id">
                   {{ option.name }}
                 </option>
               </select>
             </div>
+            <div class="form-group">              
+            <input
+              v-model="sponsor.registryDate"
+              type="date"
+              onmouseenter="(this.type='date')"
+              onmouseleave="(this.type='text')"
+              class="form-control form-control-lg"
+              id="txtBirthDate"
+              placeholder="data do registo"
+              required
+            />
+            </div>
+            <div class="form-group">
+              <select id="sltBath" class="form-control form-control-lg" v-model="sponsor.bath" required>                
+                <option value>-- TOMOU BANHO? --</option>
+                <option value="não">NÃO</option>
+                <option value="sim">SIM</option>
+                <option value="recusou">RECUSOU</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <input
+                v-model="sponsor.bloodPressure"
+                type="text"
+                class="form-control form-control-lg"
+                id="txtName"
+                placeholder="escreve pressão sanguinea"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                v-model="sponsor.temperature"
+                type="text"
+                class="form-control form-control-lg"
+                id="txtName"
+                placeholder="escreve temperatura corporal"
+              />
+            </div>
+            <div class="form-group">
+              <select id="sltDayClassification" class="form-control form-control-lg" v-model="sponsor.dayClassification">                
+                <option value>-- COMO FOI O DIA DO UTENTE? --</option>
+                <option value="RUIM">RUIM</option>
+                <option value="BOM">BOM</option>
+                <option value="ÓTIMO">ÓTIMO</option>
+              </select>
+            </div>
+            
             <div class="form-group">
               <textarea
                 id="txtDescription"
@@ -32,7 +79,7 @@
                 placeholder="escreve mensagem do sponsor"
                 cols="30"
                 rows="10"
-                v-model="sponsor.message"
+                v-model="sponsor.description"
                 required
               ></textarea>
             </div>
@@ -113,6 +160,7 @@ export default {
   },
   created() {
     this.sponsor = this.getSponsorsById(this.$route.params.sponsorId);
+    this.sponsor.registryDate = this.sponsor.registryDate.split('T')[0];
     this.fetchAnimals();
   }
 };

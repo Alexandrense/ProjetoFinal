@@ -4,8 +4,12 @@ const CONFIG = require('../config/config');
 
 const sponsorSchema = new Schema({
     name: String,
-    animal: String,
-    message: String
+    registryDate: Date,
+    bath: String,
+    bloodPressure: String,
+    temperature: String,
+    dayClassification: String,
+    description: String
 });
 
 module.exports = global.mongoConnection.model(CONFIG.mongodb.collections.sponsor, sponsorSchema);

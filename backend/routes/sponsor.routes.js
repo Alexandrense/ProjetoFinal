@@ -11,10 +11,15 @@ const AuthController = require("../controllers/auth.controller");
 
 router.route('/')
     .get(AuthController.checkAuth, SponsorController.get)
-    .post(AuthController.checkAuth, [body('name').isString(),
-        body('animal').isString(),
-        body('message').isString(),
-        sanitizeBody('message').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical)
+    .post(AuthController.checkAuth, [
+        body('name').isString(),
+        body('registryDate').isISO8601(),
+        body('bath').isString(),
+        body('bloodPressure').isString(),
+        body('temperature').isString(),
+        body('dayClassification').isString(),
+        body('description').isString(),
+        sanitizeBody('description').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical)
     ], SponsorController.create);
 
 router.route("/deactivate/:id")

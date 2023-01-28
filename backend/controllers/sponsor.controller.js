@@ -26,8 +26,12 @@ exports.create = (req, res) => {
 
     new Sponsor({
         name: req.body.name,
-        animal: req.body.animal,
-        message: req.body.message
+        registryDate: req.body.registryDate,
+        bath: req.body.bath,
+        bloodPressure: req.body.bloodPressure,
+        temperature: req.body.temperature,
+        dayClassification: req.body.dayClassification,
+        description: req.body.description
     }).save((error, sponsor) => {
         if (error) throw error;
         let message = SponsorMessages.success.s0;
