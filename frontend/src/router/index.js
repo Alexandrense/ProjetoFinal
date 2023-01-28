@@ -55,11 +55,6 @@ const routes = [
     component: () => import("@/views/users/EditUser.vue")
   },
   {
-    path: "/admin/animals",
-    name: "listAnimals",
-    component: () => import("@/views/animals/ListAnimals.vue")
-  },
-  {
     path: "/admin/days",
     name: "listDays",
     component: () => import("@/views/days/ListDays.vue")
@@ -68,16 +63,6 @@ const routes = [
     path: "/admin/patients",
     name: "listPatients",
     component: () => import("@/views/patients/ListPatients.vue")
-  },  
-  {
-    path: "/admin/animals/:animalId",
-    name: "editAnimal",
-    component: () => import("@/views/animals/EditAnimal.vue")
-  },
-  {
-    path: "/admin/animals/add",
-    name: "addAnimal",
-    component: () => import("@/views/animals/AddAnimal.vue")
   },
   {
     path: "/admin/days/add",
