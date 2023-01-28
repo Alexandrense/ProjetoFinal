@@ -16,9 +16,9 @@ const quizSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    questions: [{
+    users: [{
         type: String,
-        ref: CONFIG.mongodb.collections.question
+        ref: CONFIG.mongodb.collections.user
     }],
     active: {
         type: Boolean,

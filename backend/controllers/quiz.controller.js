@@ -25,17 +25,19 @@ exports.create = (req, res) => {
 
     new Quiz({
         name: req.body.name,
-        points: req.body.points,
-        hidden: req.body.hidden,
-        level: req.body.level,
-        questions: req.body.questions
+        birth_date: req.body.birth_date,
+        sex: req.body.sex,
+        contactName: req.body.contactName,
+        contactPhone: req.body.contactPhone,
+        contactMail: req.body.contactMail,
+        users: req.body.users
     }).save((error, quiz) => {
         if (error) throw error;
-        quiz.populate("questions", (error) => {
+        quiz.populate("users", (error) => {
             if (error) throw error;
             let message = QuizMessages.success.s0;
             message.body = quiz;
-            return res.header("location", "/quizzes/" + quiz._id).status(message.http).send(message);
+            return res.header("location", "/patients/" + quiz._id).status(message.http).send(message);
         });
 
     });
@@ -54,7 +56,7 @@ exports.update = (req, res) => {
     }, (error, quiz) => {
         if (error) throw error;
         if (!quiz) return res.status(QuizMessages.error.e0.http).send(QuizMessages.error.e0);
-        quiz.populate("questions", (error) => {
+        quiz.populate("users", (error) => {
             if (error) throw error;
             let message = QuizMessages.success.s1;
             message.body = quiz;
@@ -84,7 +86,7 @@ exports.getOne = (req, res) => {
 
     Quiz.findOne({
         _id: req.params.id
-    }).populate("questions").exec((error, quiz) => {
+    }).populate("users").exec((error, quiz) => {
         if (error) throw error;
         if (!quiz) return res.status(QuizMessages.error.e0.http).send(QuizMessages.error.e0);
         let message = QuizMessages.success.s2;

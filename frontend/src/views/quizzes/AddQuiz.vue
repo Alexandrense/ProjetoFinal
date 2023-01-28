@@ -53,7 +53,7 @@
             ><i class="fas fa-plus-square"></i> ADICIONAR UTILIZADOR AO UTENTE</button>
             <br><br>
 
-            <div v-if="questions.length">
+            <div v-if="users.length">
               <div class="row">
                 <div class="col-md-9">
                   <h4>Lista de utilizadores</h4>
@@ -65,7 +65,7 @@
             </div>
             
            
-            <div v-for="(question, index) in questions" :key="question.id">
+            <div v-for="(question, index) in users" :key="question.id">
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-9">
@@ -126,7 +126,7 @@ export default {
       name: "",
       level: "",
       points: "",
-      questions: [],
+      users: [],
       myQuestions: []
     };
   },
@@ -142,20 +142,20 @@ export default {
       return `insira a ${index}ª resposta`;
     },
     addQuestion() {
-      this.questions.push({ id: "" });
+      this.users.push({ id: "" });
     },
     removeQuestion(index) {
-      this.questions.splice(index, 1);
+      this.users.splice(index, 1);
     },
 
     add() {
-      this.questions = this.questions.map(question => question["id"]);
+      this.users = this.users.map(question => question["id"]);
       this.$store
         .dispatch(`quiz/${ADD_QUIZ}`, {
           name: this.name,
           level: this.level,
           points: this.points,
-          questions: this.questions
+          users: this.users
         })
         .then(
           () => {

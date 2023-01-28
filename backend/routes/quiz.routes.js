@@ -14,7 +14,7 @@ router.route('/')
     .post(AuthController.checkAuth, [body('name').isString(),
         body('points').isInt(),
         body('level').isInt(),
-        body('questions.*').isMongoId()
+        body('users.*').isMongoId()
     ], QuizController.create);
 
 router.route("/deactivate/:id")
