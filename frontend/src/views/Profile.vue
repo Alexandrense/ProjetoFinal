@@ -65,7 +65,7 @@ export default {
     logout() {
       this.$confirm(
         "Se sim, clique em OK",
-        "Queres mesmo sair do Animalec?",
+        "Queres mesmo sair?",
         "warning",
         { confirmButtonText: "OK", cancelButtonText: "Cancelar" }
       ).then(

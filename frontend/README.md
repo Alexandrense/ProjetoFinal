@@ -1,3 +1,3 @@
-# Based on: Animalec
-An animals pedagogical app
+# AppCuidar 1.0
+App para cuidadores de idosos
 

@@ -7,7 +7,7 @@
           tag="img"
           :src="require('@/assets/appcuidar_line.png')"
           style="width:250px; height:50px"
-          title="Página principal do Animalec"
+          title="AppCuidar"
         />
       </b-navbar-brand>
 
