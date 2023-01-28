@@ -115,7 +115,6 @@
               </div>
             </div>
             
-            
             <button type="submit" class="btn btn-outline-success mr-2"><i class="fas fa-save"></i> GRAVAR UTENTE</button>
             <router-link
               :to="{name: 'listPatients'}"
