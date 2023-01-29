@@ -9,7 +9,7 @@
         <b-col cols="8">
           <form @submit.prevent="update">
             <div class="form-group">
-              <select id="sltUtente" class="form-control form-control-lg" v-model="sponsor.patient" placeholder="utente" required>
+              <select id="sltUtente" class="form-control form-control-lg" v-model="day.patient" placeholder="utente" required>
                 <option v-for="option in patients" :key="option._id" :value="option._id">
                   {{ option.name }}
                 </option>
@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">              
             <input
-              v-model="sponsor.registryDate"
+              v-model="day.registryDate"
               type="date"
               onmouseenter="(this.type='date')"
               onmouseleave="(this.type='text')"
@@ -28,7 +28,7 @@
             />
             </div>
             <div class="form-group">
-              <select id="sltBath" class="form-control form-control-lg" v-model="sponsor.bath" required>                
+              <select id="sltBath" class="form-control form-control-lg" v-model="day.bath" required>                
                 <option value>-- TOMOU BANHO? --</option>
                 <option value="não">NÃO</option>
                 <option value="sim">SIM</option>
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="sponsor.bloodPressure"
+                v-model="day.bloodPressure"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtName"
@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
               <input
-                v-model="sponsor.temperature"
+                v-model="day.temperature"
                 type="text"
                 class="form-control form-control-lg"
                 id="txtName"
@@ -54,7 +54,7 @@
               />
             </div>
             <div class="form-group">
-              <select id="sltDayClassification" class="form-control form-control-lg" v-model="sponsor.dayClassification">                
+              <select id="sltDayClassification" class="form-control form-control-lg" v-model="day.dayClassification">                
                 <option value>-- COMO FOI O DIA DO UTENTE? --</option>
                 <option value="RUIM">RUIM</option>
                 <option value="BOM">BOM</option>
@@ -68,7 +68,7 @@
                 placeholder="observações"
                 cols="30"
                 rows="5"
-                v-model="sponsor.description"
+                v-model="day.description"
                 required
               ></textarea>
             </div>
@@ -105,7 +105,7 @@ export default {
   },
   data: () => {
     return {
-      sponsor: {},
+      day: {},
       patients: [],
       sortType: 1
     };
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     removeComments() {
-      this.sponsor.comments.length = 0
+      this.day.comments.length = 0
       this.$alert("Comentários removidos, clique em atualizar!", "Comentários!", "success");
     },
     fetchPatients() {
@@ -145,9 +145,9 @@ export default {
       else return 0;
     },
     update() {
-      this.$store.dispatch(`sponsor/${EDIT_SPONSOR}`, this.$data.sponsor).then(
+      this.$store.dispatch(`sponsor/${EDIT_SPONSOR}`, this.$data.day).then(
         () => {
-          this.$alert(this.getMessage, "Sponsor atualizado!", "success");
+          this.$alert(this.getMessage, "Registo atualizado!", "success");
           router.push({ name: "listDays" });
         },
         err => {
@@ -157,8 +157,8 @@ export default {
     }
   },
   created() {
-    this.sponsor = this.getSponsorsById(this.$route.params.sponsorId);
-    this.sponsor.registryDate = this.sponsor.registryDate.split('T')[0];
+    this.day = this.getSponsorsById(this.$route.params.sponsorId);
+    this.day.registryDate = this.day.registryDate.split('T')[0];
     this.fetchPatients();
   }
 };

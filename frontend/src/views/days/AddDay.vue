@@ -148,7 +148,7 @@ export default {
     add() {
       this.$store.dispatch(`sponsor/${ADD_SPONSOR}`, this.$data).then(
         () => {
-          this.$alert(this.getMessage, "Sponsor adicionado!", "success");
+          this.$alert(this.getMessage, "Registo adicionado!", "success");
           router.push({ name: "listDays" });
         },
         err => {
