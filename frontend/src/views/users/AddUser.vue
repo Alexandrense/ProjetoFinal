@@ -108,13 +108,11 @@ export default {
   },
   data: () => {
     return {
-      location: { city: "", district: "", country: "" },
+      location: { city: "", country: "" },
       auth: { username: "", password: "" },
-      gamification: { points: "", quiz: "" },
       active: true,
       name: "",
       type: "",
-      birth_date: "",
       description: ""
     };
   },

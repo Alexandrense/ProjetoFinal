@@ -12,16 +12,12 @@ const AuthController = require("../controllers/auth.controller");
 router.route('/')
     .post([body('name').isString(),
         body('type').isAlpha(),
-        body('description').isString(),
         body('location.city').isString(),
-        body('location.district').isString(),
         body('location.country').isString(),
         body('auth.username').isAlphanumeric(),
         body('auth.password').isString(),
         sanitizeBody('name').whitelist(CONFIG.sanitize.alphabet),
-        sanitizeBody('description').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical),
         sanitizeBody('location.city').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical),
-        sanitizeBody('location.district').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical),
         sanitizeBody('location.country').whitelist(CONFIG.sanitize.alphabet + CONFIG.sanitize.numerical)
     ], UserController.create)
     .get(AuthController.checkAuth, UserController.get);

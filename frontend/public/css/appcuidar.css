@@ -6284,7 +6284,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: gray !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -9819,5 +9819,5 @@ form .row:first-child .floating-label-form-group {
 }
 
 .copyright {
-  background-color: #1a252f;
+  background-color: silver;
 }

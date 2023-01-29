@@ -94,7 +94,6 @@ export default {
     sort() {
       this.users.sort(this.compareNames)
       this.sortType *= -1
-      
     },
     compareNames(u1,u2) {
       if(u1.name > u2.name) return 1 * this.sortType
@@ -139,7 +138,7 @@ export default {
           this.$store.dispatch(`user/${REMOVE_USER}`, id).then(() => {
             this.$alert(
               this.getMessage,
-              "Utilizador removido!",
+              "Utilizador removido com sucesso!",
               "success"
             );
             this.fetchUsers();

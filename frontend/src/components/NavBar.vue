@@ -21,8 +21,8 @@
             <b-nav-item :to="{ name: 'profile' }">{{getProfile.auth.username.toUpperCase()}} ({{getUserType.toUpperCase()}})</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav v-else>
-            <b-nav-item :to="{ name: 'listUsers' }">UTILIZADORES</b-nav-item>
             <b-nav-item :to="{ name: 'listPatients' }">UTENTES</b-nav-item>
+            <b-nav-item :to="{ name: 'listUsers' }">UTILIZADORES</b-nav-item>
           </b-navbar-nav>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto mr-5" v-else>

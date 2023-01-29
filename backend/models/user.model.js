@@ -6,11 +6,8 @@ const bcrypt = require("bcryptjs");
 const userSchema = new Schema({
     name: String,
     type: String,
-    birth_date: Date,
-    description: String,
     location: {
         city: String,
-        district: String,
         country: String
     },
     auth: {
@@ -25,11 +22,6 @@ const userSchema = new Schema({
     registration_date: {
         type: Date,
         default: Date.now
-    },
-    quiz: {
-        id_quiz: String,
-        points: Number,
-        date: Date
     },
     active: {
         type: Boolean,

@@ -5,6 +5,8 @@ const {
 const UserMessages = require("../messages/user.messages");
 const JWT = require("jsonwebtoken");
 const CONFIG = require("../config/config");
+const PatientMessages = require("../messages/patient.messages");
+const Patient = require("../models/patient.model");
 
 exports.get = (req, res) => {
 
@@ -52,11 +54,9 @@ exports.create = (req, res) => {
         new User({
             name: req.body.name,
             type: req.body.type,
-            birth_date: req.body.birth_date,
             description: req.body.description,
             location: {
                 city: req.body.location.city,
-                district: req.body.location.district,
                 country: req.body.location.country
             },
             auth: {
@@ -120,6 +120,14 @@ exports.delete = (req, res) => {
         if (error) throw error;
         if (result.deletedCount <= 0) return res.status(UserMessages.error.e1.http).send(UserMessages.error.e1);
 
+        Patient.updateMany({}, {
+            $pull: {
+                users: req.params.id
+            }
+        }, (error) => {
+            if (error) throw error;
+            return res.status(PatientMessages.success.s3.http).send(PatientMessages.success.s3);
+        });
         
     });
 

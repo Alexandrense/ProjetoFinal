@@ -52,8 +52,7 @@
                     @click="removePatient(patient._id)"
                     type="button"
                     class="btn btn-outline-danger mr-2 mt-2"
-                  >
-                    <i class="fas fa-trash-alt"></i> REMOVER
+                  ><i class="fas fa-trash-alt"></i> REMOVER
                   </button>
                 </td>
               </tr>
