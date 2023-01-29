@@ -116,10 +116,6 @@ export default {
     ...mapGetters({ user: "auth/getProfile" })
   },
   methods: {
-    removeComments() {
-      this.day.comments.length = 0
-      this.$alert("Comentários removidos, clique em atualizar!", "Comentários!", "success");
-    },
     fetchPatients() {
       this.$store.dispatch(`quiz/${FETCH_QUIZZES}`).then(
         () => {

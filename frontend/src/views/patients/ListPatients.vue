@@ -13,9 +13,6 @@
           >
             <i class="fas fa-plus-square"></i> ADICIONAR UTENTE
           </router-link>
-          <router-link :to="{name:'home'}" tag="button" class="btn btn-outline-info mr-2 mt-2">
-            <i class="fas fa-bars"></i> MENU PRINCIPAL
-          </router-link>
         </b-col>
         <b-col cols="1"></b-col>
       </b-row>

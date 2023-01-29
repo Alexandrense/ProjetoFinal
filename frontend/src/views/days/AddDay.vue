@@ -71,7 +71,6 @@
                 cols="30"
                 rows="5"
                 v-model="description"
-                required
               ></textarea>
             </div>
             
@@ -159,6 +158,7 @@ export default {
   },
   created() {
     this.fetchPatients();
+    this.registryDate = new Date().toISOString().slice(0,10);
   }
 };
 
