@@ -1,4 +1,4 @@
-import quizService from "@/api/quiz.service";
+import quizService from "@/api/patient.service";
 import { 
   // Actions
   FETCH_QUIZZES,
