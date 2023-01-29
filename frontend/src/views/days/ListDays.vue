@@ -83,7 +83,7 @@
 
 <script>
 import { FETCH_SPONSORS, REMOVE_SPONSOR } from "@/store/sponsors/sponsor.constants";
-import { FETCH_QUIZZES } from "@/store/quizzes/patient.constants";
+import { FETCH_QUIZZES } from "@/store/patients/patient.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import { mapGetters } from "vuex";
 

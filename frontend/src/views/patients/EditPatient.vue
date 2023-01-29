@@ -138,7 +138,7 @@
 </template>
 
 <script>
-import { EDIT_QUIZ } from "@/store/quizzes/patient.constants";
+import { EDIT_QUIZ } from "@/store/patients/patient.constants";
 import router from "@/router";
 import HeaderPage from "@/components/HeaderPage.vue"
 import { FETCH_USERS } from "@/store/users/user.constants";
