@@ -65,7 +65,7 @@
               <textarea
                 id="txtDescription"
                 class="form-control form-control-lg"
-                placeholder="escreve mensagem do sponsor"
+                placeholder="observações"
                 cols="30"
                 rows="5"
                 v-model="sponsor.description"
@@ -112,18 +112,27 @@ export default {
   },
   computed: {
     ...mapGetters("sponsor", ["getSponsorsById", "getMessage"]),
-    ...mapGetters("quiz", ["getQuizzes"])
+    ...mapGetters("quiz", ["getQuizzes"]),
+    ...mapGetters({ user: "auth/getProfile" })
   },
   methods: {
     removeComments() {
       this.sponsor.comments.length = 0
       this.$alert("Comentários removidos, clique em atualizar!", "Comentários!", "success");
     },
-    fetchAnimals() {
+    fetchPatients() {
       this.$store.dispatch(`quiz/${FETCH_QUIZZES}`).then(
         () => {
           this.patients = this.getQuizzes;
           this.patients.sort(this.compareNames);
+          this.patients = this.patients.filter(item => {
+            let userExists;
+            userExists = item.users.filter(userItem => userItem._id == this.user._id);
+            if (userExists.length > 0 || this.user.type == 'admin') {
+              return true;
+            }
+            return false;
+          });
         },
         err => {
           this.$alert(`${err.message}`, "Erro", "error");
@@ -150,7 +159,7 @@ export default {
   created() {
     this.sponsor = this.getSponsorsById(this.$route.params.sponsorId);
     this.sponsor.registryDate = this.sponsor.registryDate.split('T')[0];
-    this.fetchAnimals();
+    this.fetchPatients();
   }
 };
 </script>

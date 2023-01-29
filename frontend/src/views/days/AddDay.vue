@@ -67,7 +67,7 @@
               <textarea
                 id="txtDescription"
                 class="form-control form-control-lg"
-                placeholder="escreve mensagem do sponsor"
+                placeholder="observações"
                 cols="30"
                 rows="5"
                 v-model="description"
@@ -117,7 +117,8 @@ export default {
   },
   computed: {
     ...mapGetters("sponsor", ["getSponsors", "getMessage"]),
-    ...mapGetters("quiz", ["getQuizzes"])
+    ...mapGetters("quiz", ["getQuizzes"]),
+    ...mapGetters({ user: "auth/getProfile" })
   },
   methods: {    
     fetchPatients() {
@@ -125,6 +126,14 @@ export default {
         () => {
           this.patients = this.getQuizzes;
           this.patients.sort(this.compareNames);
+          this.patients = this.patients.filter(item => {
+            let userExists;
+            userExists = item.users.filter(userItem => userItem._id == this.user._id);
+            if (userExists.length > 0 || this.user.type == 'admin') {
+              return true;
+            }
+            return false;
+          });
         },
         err => {
           this.$alert(`${err.message}`, "Erro", "error");
