@@ -69,11 +69,11 @@
             </div>
             <div class="form-group">
               <input
-                v-model="user.auth.password"
                 type="password"
                 class="form-control form-control-lg"
                 id="txtConfirmPassword"
                 placeholder="confirma password"
+                required
               />
             </div>
             <button type="submit" class="btn btn-outline-success btn-lg mr-2">
@@ -112,19 +112,32 @@ export default {
   },
   methods: {
     update() {
-      this.$store.dispatch(`user/${EDIT_USER}`, this.$data.user).then(
-        () => {
-          this.$alert(
-            this.getMessage,
-            "Utilizador atualizado!",
-            "success"
-          );
-          router.push({name: 'listUsers'});
-        },
-        err => {
-          this.$alert(`${err.message}`, "Erro", "error");
-        }
-      );
+
+      if (
+        document.querySelector("#txtPassword").value !==
+        document.querySelector("#txtConfirmPassword").value
+      ) {
+        this.$alert(
+          "Campos password não coincidem",
+          "Erro de validação do formulário",
+          "error"
+        );
+      } else {
+
+        this.$store.dispatch(`user/${EDIT_USER}`, this.$data.user).then(
+          () => {
+            this.$alert(
+              this.getMessage,
+              "Utilizador atualizado!",
+              "success"
+            );
+            router.push({name: 'listUsers'});
+          },
+          err => {
+            this.$alert(`${err.message}`, "Erro", "error");
+          }
+        );
+      }
     }
   },
   created() {

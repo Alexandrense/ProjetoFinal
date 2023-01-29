@@ -7,6 +7,7 @@ const JWT = require("jsonwebtoken");
 const CONFIG = require("../config/config");
 const PatientMessages = require("../messages/patient.messages");
 const Patient = require("../models/patient.model");
+const bcrypt = require("bcryptjs");
 
 exports.get = (req, res) => {
 
@@ -90,6 +91,8 @@ exports.update = (req, res) => {
 
     const errors = validationResult(req).array();
     if (errors.length > 0) return res.status(406).send(errors);
+
+    req.body.auth.password = bcrypt.hashSync(escape(req.body.auth.password), bcrypt.genSaltSync(2));
 
     User.findOneAndUpdate({
         _id: req.params.id
