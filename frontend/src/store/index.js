@@ -5,7 +5,7 @@ import moduleBase from "./module";
 import moduleAuth from "./auth/auth.module";
 import moduleUser from "./users/user.module";
 import moduleQuiz from "./patients/patient.module";
-import moduleSponsor from "./sponsors/sponsor.module";
+import moduleSponsor from "./sponsors/day.module";
 
 Vue.use(Vuex);
 

@@ -1,4 +1,4 @@
-import sponsorService from "@/api/sponsor.service";
+import sponsorService from "@/api/day.service";
 import { 
   // Actions
   FETCH_SPONSORS, 
@@ -9,7 +9,7 @@ import {
   SET_SPONSORS, 
   SET_MESSAGE,
   UPDATE_LIKES 
-} from "./sponsor.constants";
+} from "./day.constants";
 
 const state = {
   sponsors: []

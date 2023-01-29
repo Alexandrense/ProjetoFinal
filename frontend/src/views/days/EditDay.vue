@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { EDIT_SPONSOR } from "@/store/sponsors/sponsor.constants";
+import { EDIT_SPONSOR } from "@/store/sponsors/day.constants";
 import { FETCH_QUIZZES } from "@/store/patients/patient.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import router from "@/router";
