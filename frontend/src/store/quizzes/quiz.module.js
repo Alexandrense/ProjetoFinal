@@ -8,7 +8,7 @@ import {
   // Mutations 
   SET_QUIZZES,
   SET_MESSAGE 
-} from "./quiz.constants";
+} from "./patient.constants";
 
 const state = {
   quizzes: [],

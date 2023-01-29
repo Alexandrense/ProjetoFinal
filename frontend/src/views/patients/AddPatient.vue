@@ -130,7 +130,7 @@
 </template>
 
 <script>
-import { ADD_QUIZ } from "@/store/quizzes/quiz.constants";
+import { ADD_QUIZ } from "@/store/quizzes/patient.constants";
 import HeaderPage from "@/components/HeaderPage.vue"
 import { FETCH_USERS } from "@/store/users/user.constants";
 import router from "@/router";

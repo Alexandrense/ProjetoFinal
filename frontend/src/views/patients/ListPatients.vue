@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { FETCH_QUIZZES, REMOVE_QUIZ } from "@/store/quizzes/quiz.constants";
+import { FETCH_QUIZZES, REMOVE_QUIZ } from "@/store/quizzes/patient.constants";
 import { mapGetters } from "vuex";
 import HeaderPage from "@/components/HeaderPage.vue"
 export default {

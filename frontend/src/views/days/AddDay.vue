@@ -92,7 +92,7 @@
 
 <script>
 import { ADD_SPONSOR } from "@/store/sponsors/sponsor.constants";
-import { FETCH_QUIZZES } from "@/store/quizzes/quiz.constants";
+import { FETCH_QUIZZES } from "@/store/quizzes/patient.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import router from "@/router";
 import { mapGetters } from "vuex";
