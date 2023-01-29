@@ -101,7 +101,6 @@ export default {
       else if(u1.name < u2.name) return -1 * this.sortType
       else return 0
     },
-
     viewUser(id) {
       const user = this.users.find(user => user._id === id);
       this.$fire({
@@ -113,7 +112,6 @@ export default {
         imageAlt: "Imagem desconhecida"
       });
     },
-
     generateTemplate(user) {
       return `
           <p>

@@ -18,7 +18,7 @@
         <b-navbar-nav v-if="isUserLoggedIn" class="ml-auto mr-5">
           <b-nav-item :to="{ name: 'listDays' }">REGISTO DIARIO</b-nav-item>
           <b-navbar-nav v-if="getUserType != 'admin'">
-            <b-nav-item :to="{ name: 'profile' }">PERFIL</b-nav-item>
+            <b-nav-item :to="{ name: 'profile' }">{{getProfile.auth.username.toUpperCase()}} ({{getUserType.toUpperCase()}})</b-nav-item>
           </b-navbar-nav>
           <b-navbar-nav v-else>
             <b-nav-item :to="{ name: 'listUsers' }">UTILIZADORES</b-nav-item>

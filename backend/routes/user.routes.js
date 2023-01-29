@@ -12,7 +12,6 @@ const AuthController = require("../controllers/auth.controller");
 router.route('/')
     .post([body('name').isString(),
         body('type').isAlpha(),
-        body('birth_date').isISO8601(),
         body('description').isString(),
         body('location.city').isString(),
         body('location.district').isString(),

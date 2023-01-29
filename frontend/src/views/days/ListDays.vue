@@ -53,14 +53,19 @@
                 <td class="pt-4">{{showHumanDate(sponsor.registryDate)}}</td>             
                 <td class="pt-4">{{sponsor.dayClassification}}</td>
                 <td>
-                  <router-link
+                  <router-link v-if="getUserType == 'admin' || getUserType == 'caregiver'"
                     :to="{name:'editDay', params:{sponsorId: sponsor._id}}"
                     tag="button"
                     class="btn btn-outline-success mr-2 mt-2"
                   >
                     <i class="fas fa-edit"></i> EDITAR
-                  </router-link>                  
+                  </router-link>       
                   <button
+                    @click="viewUser(sponsor._id)"
+                    type="button"
+                    class="btn btn-outline-success mr-2 mt-2"
+                  ><i class="fas fa-search"></i> VER</button>
+                  <button v-if="getUserType == 'admin'"
                     @click="removeSponsor(sponsor._id)"
                     type="button"
                     class="btn btn-outline-danger mr-2 mt-2"
@@ -75,6 +80,7 @@
         <b-col cols="2"></b-col>
       </b-row>
     </b-container>
+    
   </section>
 </template>
 
@@ -101,6 +107,9 @@ export default {
     ...mapGetters("sponsor", ["getSponsors", "getMessage"]),
     ...mapGetters("quiz", ["getQuizzes"]),
     ...mapGetters({ user: "auth/getProfile" }),
+    ...mapGetters("auth", [
+      "getUserType",
+    ]),
     filteredRegistries() {
       return this.sponsors.filter(item => {
         let filterGroupResult = true;
@@ -110,6 +119,10 @@ export default {
     },
   },
   methods: {
+    getPatientName(id) {
+      let patientItem = this.patients.filter(item => item._id == id);
+      return patientItem[0].name;
+    },
     fetchPatients() {
       this.$store.dispatch(`quiz/${FETCH_QUIZZES}`).then(
         () => {
@@ -148,7 +161,30 @@ export default {
       else if (u1.name < u2.name) return -1 * this.sortType;
       else return 0;
     },
-    
+    viewUser(id) {
+      const dayregistry = this.sponsors.find(item => item._id === id);
+      this.$fire({
+        title: this.showHumanDate(dayregistry.registryDate),
+        html: this.generateTemplate(dayregistry, this.getPatientName(this.filterPatient))
+      });
+    },
+    generateTemplate(dayregistry, patientName) {
+      return `
+          <p>
+          <b>Utente:</b> ${patientName} <br>
+          <b>Banho:</b> ${dayregistry.bath} <br>
+          <b>Temperatura:</b> ${dayregistry.temperature} <br>
+          <b>Pressão Sanguinea:</b> ${dayregistry.bloodPressure}<br>
+          <b>Classificação do dia:</b> ${dayregistry.dayClassification}<br>
+          <b>Observações:</b> ${dayregistry.description}
+          </p>
+        `
+    },
+    formatDate: d => 
+    {
+      const newDate = new Date(Date.parse(d))
+      return newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + " " + newDate.getHours() + ":" + newDate.getMinutes() + ":" + newDate.getSeconds()
+    },
     showHumanDate(dateField) {
       if (dateField) {
         return dateField.split('T')[0];
