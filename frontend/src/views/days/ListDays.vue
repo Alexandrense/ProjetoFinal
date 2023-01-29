@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { FETCH_SPONSORS, REMOVE_SPONSOR } from "@/store/sponsors/day.constants";
+import { FETCH_SPONSORS, REMOVE_SPONSOR } from "@/store/dailyregistries/day.constants";
 import { FETCH_QUIZZES } from "@/store/patients/patient.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import { mapGetters } from "vuex";

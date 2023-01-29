@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { ADD_SPONSOR } from "@/store/sponsors/day.constants";
+import { ADD_SPONSOR } from "@/store/dailyregistries/day.constants";
 import { FETCH_QUIZZES } from "@/store/patients/patient.constants";
 import HeaderPage from "@/components/HeaderPage.vue";
 import router from "@/router";
